@@ -1,0 +1,87 @@
+name: aegis-lab
+services:
+  database:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-aegis}
+      POSTGRES_USER: ${POSTGRES_USER:-aegis}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./infrastructure/database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+  ai-runtime:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/runtime.Dockerfile
+    environment:
+      PGHOST: database
+      PGPORT: '5432'
+      PGDATABASE: ${POSTGRES_DB:-aegis}
+      PGUSER: ${POSTGRES_USER:-aegis}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      EMBEDDING_CACHE_DIR: /home/runtime/.model-cache
+      MIGRATIONS_DIR: /app/migrations
+    volumes:
+      - embedding-cache:/home/runtime/.model-cache
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/api.Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      AiRuntime__BaseUrl: http://ai-runtime:8000
+    ports: ["127.0.0.1:5080:8080"]
+    depends_on:
+      ai-runtime:
+        condition: service_healthy
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, curl, --fail, --silent, http://localhost:8080/health/ready]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  web:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/web.Dockerfile
+    ports: ["127.0.0.1:4200:8080"]
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, wget, -q, --spider, http://127.0.0.1:8080/health]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.139.0
+    profiles: [observability]
+    command: [--config=/etc/otelcol/config.yaml]
+    volumes:
+      - ./infrastructure/observability/collector.yaml:/etc/otelcol/config.yaml:ro
+    healthcheck:
+      test: [CMD, /otelcol-contrib, validate, --config=/etc/otelcol/config.yaml]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+volumes:
+  postgres-data:
+  embedding-cache:

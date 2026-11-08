@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RuntimeResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["executionId", "provider", "summary", "citations"],
+  "properties": {
+    "executionId": {"type": "string", "format": "uuid"},
+    "provider": {"enum": ["deterministic", "llm"]},
+    "summary": {"type": "string", "maxLength": 16000},
+    "citations": {"type": "array", "maxItems": 20, "items": {"type": "string", "minLength": 1, "maxLength": 500}}
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RuntimeRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["executionId", "correlationId", "task", "allowedTools"],
+  "properties": {
+    "executionId": {"type": "string", "format": "uuid"},
+    "correlationId": {"type": "string", "format": "uuid"},
+    "task": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "allowedTools": {"type": "array", "uniqueItems": true, "maxItems": 16, "items": {"type": "string", "minLength": 1, "maxLength": 100}}
+  }
+}

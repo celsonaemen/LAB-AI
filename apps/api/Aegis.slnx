@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/Aegis.Domain/Aegis.Domain.csproj" />
+  <Project Path="src/Aegis.Application/Aegis.Application.csproj" />
+  <Project Path="src/Aegis.Infrastructure/Aegis.Infrastructure.csproj" />
+  <Project Path="src/Aegis.Api/Aegis.Api.csproj" />
+  <Project Path="tests/Aegis.Api.Tests/Aegis.Api.Tests.csproj" />
+</Solution>

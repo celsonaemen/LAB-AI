@@ -1,0 +1,48 @@
+<div class="intro"><h1>Execuções de agentes</h1><p>Da solicitação às evidências, passo a passo.</p><p class="muted">Carteiras fictícias para demonstração. A revisão documental usa a base de conhecimento. Fechar esta tela não cancela uma execução.</p></div>
+<div class="workspace">
+  <section class="ingestion" aria-labelledby="execution-create"><h2 id="execution-create">Nova execução</h2>
+    <form (ngSubmit)="create()"><fieldset [disabled]="busy()">
+      <label for="task">O que deseja analisar?</label><textarea id="task" name="task" [(ngModel)]="task" rows="4" maxlength="500" required placeholder="Revise a concentração e os riscos da carteira fictícia."></textarea><small>{{ task.length }}/500 caracteres</small>
+      <label for="workflow">Fluxo de trabalho</label><select id="workflow" name="workflow" [(ngModel)]="workflow"><option value="portfolio-review">Revisão de carteira fictícia</option><option value="document-review">Revisão documental</option></select>
+      <label for="portfolio">Carteira fictícia</label><select id="portfolio" name="portfolio" [(ngModel)]="portfolioId"><option value="balanced">Equilibrada</option><option value="concentrated">Concentrada</option></select>
+      <label class="check" for="approval"><input id="approval" name="approval" type="checkbox" [(ngModel)]="requireApproval"> Exigir aprovação antes do relatório</label>
+      <details><summary>Filtro de evidências</summary><label for="execution-filter">Metadados (JSON)</label><textarea id="execution-filter" name="executionFilter" [(ngModel)]="filter" rows="3" spellcheck="false"></textarea><small>Correspondência exata. Ex.: {{ '{"area":"risco"}' }}</small></details>
+      <button type="submit">{{ busy() ? 'Enviando…' : 'Iniciar execução' }}</button>
+    </fieldset></form>
+    <div class="history"><h2>Histórico recente</h2><button class="secondary" type="button" (click)="loadHistory()" [disabled]="historyBusy()">{{ historyBusy() ? 'Carregando…' : 'Carregar histórico' }}</button>
+      @if (historyLoaded() && !history().length) { <p class="muted">Nenhuma execução registrada.</p> }
+      @for (item of history(); track item.id) { <button class="history-item" type="button" (click)="select(item.id)"><strong>{{ item.task }}</strong><small>{{ stateLabel(item.state) }} · {{ item.createdAt | date:'dd/MM HH:mm' }}</small></button> }
+    </div>
+  </section>
+  <section aria-labelledby="execution-monitor">
+    <details class="event-log"><summary>Catálogo MCP</summary>
+      <p>Ferramentas disponíveis ao fluxo. A descoberta não executa ferramentas nem realiza inferência.</p>
+      <button type="button" class="secondary" (click)="discoverTools()" [disabled]="toolsBusy()">{{ toolsBusy() ? 'Descobrindo…' : 'Descobrir ferramentas MCP' }}</button>
+      @if (toolsError()) { <p class="error" role="alert">{{ toolsError() }}</p> }
+      @if (toolsLoaded() && !tools().length) { <p>Nenhuma ferramenta descoberta.</p> }
+      @for (tool of tools(); track tool.id) { <article class="event"><h3>{{ tool.id }}</h3><p>{{ tool.description }}</p><p>Agentes permitidos: {{ tool.allowedAgents.join(', ') }}</p><p>{{ tool.requiresApproval ? 'Exige aprovação explícita antes da chamada.' : 'Sem aprovação adicional; permissões do agente continuam obrigatórias.' }}</p><details><summary>Schema de entrada</summary><pre>{{ tool.inputSchema | json }}</pre></details></article> }
+    </details><h2 id="execution-monitor">Acompanhamento</h2>
+    @if (error()) { <p class="error" role="alert">{{ error() }}</p> }
+    @if (selected(); as run) {
+      <div class="run-heading"><h3>{{ run.task }}</h3><span class="state">{{ stateLabel(run.state) }}</span></div>
+      <p class="provider">{{ run.provider === 'deterministic' ? 'Determinístico · relatório por regras, sem inferência de LLM.' : run.provider === 'ollama' ? 'Ollama · provedor local de LLM selecionado. Uma falha de inferência será exibida.' : 'Provedor: ' + run.provider }}</p>
+      <p class="muted" role="status">{{ connection() }}</p>
+      <div class="actions"><button type="button" class="secondary" (click)="select(run.id)" [disabled]="busy()">Atualizar / reconectar</button>
+        @if (run.state === 'AwaitingApproval') { <button type="button" (click)="action('approve')" [disabled]="busy()">Aprovar relatório</button> }
+        @if (!terminal(run.state)) { <button type="button" class="secondary" (click)="action('cancel')" [disabled]="busy()">Cancelar execução</button> }
+      </div>
+      @if (run.state === 'AwaitingApproval') { <p class="notice">Revise os resultados dos agentes abaixo. O relatório aguarda sua aprovação.</p> }
+      <dl><dt>Execução</dt><dd>{{ run.id }}</dd><dt>Criada em</dt><dd>{{ run.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</dd><dt>Início</dt><dd>{{ run.startedAt ? (run.startedAt | date:'HH:mm:ss') : 'Aguardando' }}</dd><dt>Fim</dt><dd>{{ run.finishedAt ? (run.finishedAt | date:'HH:mm:ss') : '—' }}</dd><dt>Duração</dt><dd>{{ run.durationMs === null ? '—' : run.durationMs + ' ms' }}</dd></dl>
+      <h3>Progresso dos agentes</h3><ol class="agents">
+      @for (agent of run.agents; track agent.id) { <li><div class="run-heading"><strong>{{ agent.id }}</strong><span>{{ stateLabel(agent.state) }}</span></div><small>{{ agent.startedAt ? (agent.startedAt | date:'HH:mm:ss') : 'Não iniciado' }} · {{ agent.durationMs === null ? 'Duração pendente' : agent.durationMs + ' ms' }}</small>@if (agent.error) { <p class="error">{{ safeDisplay(agent.error) }}</p> }@if (agent.result) { <details><summary>Resultado do agente</summary><pre>{{ safeDisplay(agent.result) | json }}</pre></details> }</li> }
+      </ol>
+      @if (run.error) { <p class="error" role="alert">{{ safeDisplay(run.error) }}</p> }
+      @if (run.result) { <section class="result"><h3>Resultado final</h3><pre>{{ safeDisplay(run.result) | json }}</pre></section> }
+      <details class="event-log" open><summary>Eventos, ferramentas e evidências ({{ events().length }})</summary>
+        @for (event of events(); track event.sequence) { <article class="event"><strong>{{ eventLabel(event.type) }}</strong><small>#{{ event.sequence }} · {{ event.timestamp | date:'HH:mm:ss' }} @if (event.agentId) { · {{ event.agentId }} }</small>@if (event.type === 'GuardrailBlocked') { <p class="error" role="alert">A ação foi bloqueada por uma regra de segurança. Revise os dados do evento antes de iniciar outra execução.</p> }<details><summary>Dados do evento</summary><pre>{{ safeDisplay(event.data) | json }}</pre></details></article> }
+        @if (!events().length) { <p class="muted">Nenhum evento carregado.</p> }
+      </details>
+    } @else { <div class="empty"><h3>Uma execução, cada etapa visível</h3><p>Inicie uma análise ou abra uma execução do histórico para acompanhar agentes, ferramentas, evidências e resultados.</p></div> }
+  </section>
+</div>
+

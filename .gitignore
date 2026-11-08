@@ -1,0 +1,23 @@
+.env
+.env.*
+!.env.example
+.venv/
+.tools/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+node_modules/
+dist/
+.angular/
+bin/
+obj/
+TestResults/
+*.db
+*.log
+.vs/
+.model-cache/
+.audit.json
+.artifacts/
+# Private vacancy research retained locally; never publish with the project.
+Análise da vaga Full Stack.html
+Análise da vaga Full Stack_files/
