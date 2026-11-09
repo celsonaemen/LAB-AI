@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddJsonConsole();
 builder.Services.AddProblemDetails();
+// Internal bodies and service credentials must not follow redirects or proxies.
+builder.Services.ConfigureHttpClientDefaults(http => http.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler { AllowAutoRedirect = false, UseProxy = false, UseCookies = false }));
 builder.Services.AddScoped<IBankCaseWorkflow, BankCaseWorkflow>();
 builder.Services.AddRateLimiter(options =>
 {

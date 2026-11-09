@@ -31,10 +31,18 @@ jobs:
           python-version: '3.12'
       - run: dotnet test apps/api/Aegis.slnx
       - run: pip install -e './apps/ai-runtime[test]'
+      - name: Provision public embedding model before offline tests
+        run: python -c "import os; from fastembed import TextEmbedding; from app.rag.knowledge import MODEL; TextEmbedding(model_name=MODEL, cache_dir=os.environ['EMBEDDING_CACHE_DIR'])"
+        env:
+          EMBEDDING_CACHE_DIR: ${{ github.workspace }}/.model-cache
+          HF_HUB_DISABLE_TELEMETRY: '1'
       - run: python -m pytest apps/ai-runtime/tests -q
         env:
           AEGIS_TEST_DATABASE_URL: postgresql://aegis_test@localhost:5432/aegis_test
           AEGIS_REAL_EMBEDDINGS: '1'
+          EMBEDDING_CACHE_DIR: ${{ github.workspace }}/.model-cache
+          HF_HUB_OFFLINE: '1'
+          HF_HUB_DISABLE_TELEMETRY: '1'
       - run: npm ci
         working-directory: apps/web
       - run: npm run build

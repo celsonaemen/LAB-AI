@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
+using Aegis.Application;
 
 // Dedicated deployment: all authorized members share one approved knowledge workspace.
 // This is not customer-level authorization or a multi-tenant data boundary.
@@ -53,8 +54,10 @@ public static class BankSecurity
                     .RequireClaim("sub").RequireClaim("aegis_workspace", workspace)
                     .RequireClaim("aegis_permission", permission));
         });
-        builder.Services.ConfigureHttpClientDefaults(http => http.ConfigureHttpClient(client =>
-            client.DefaultRequestHeaders.Add("X-Aegis-Service-Token", runtimeToken)));
+        // Only the four dedicated runtime clients may receive this credential.
+        foreach (var clientName in new[] { nameof(IToolRuntime), nameof(IExecutionRuntime), nameof(IKnowledgeRuntime), nameof(IRuntimeHealth) })
+            builder.Services.AddHttpClient(clientName, client =>
+                client.DefaultRequestHeaders.Add("X-Aegis-Service-Token", runtimeToken));
         return true;
     }
 

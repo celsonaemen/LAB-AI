@@ -10,6 +10,7 @@ from app.executions.worker import start_worker
 from app.executions.repository import database_ready as executions_ready
 import os
 from app.security import ServiceAuthentication
+from fastapi.exceptions import RequestValidationError
 
 
 @asynccontextmanager
@@ -23,6 +24,16 @@ async def lifespan(app):
 
 app = FastAPI(title="AEGIS AI Runtime", version="0.1.0", lifespan=lifespan)
 app.add_middleware(ServiceAuthentication)
+
+
+@app.exception_handler(RequestValidationError)
+async def invalid_request(_request, _error):
+    # Pydantic's default response includes rejected input values and may expose
+    # credentials, document bodies or client details to response collectors.
+    return JSONResponse(status_code=422, content={"detail": "Invalid request"},
+                        headers={"Cache-Control": "no-store"})
+
+
 app.include_router(knowledge_router)
 app.include_router(executions_router)
 app.include_router(mcp_tools_router)

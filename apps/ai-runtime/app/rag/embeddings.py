@@ -15,6 +15,7 @@ def _model():
         model_name=MODEL,
         cache_dir=os.getenv("EMBEDDING_CACHE_DIR", ".model-cache"),
         threads=2,
+        local_files_only=True,
     )
 
 
