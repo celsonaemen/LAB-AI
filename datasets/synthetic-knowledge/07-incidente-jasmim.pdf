@@ -1,0 +1,91 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+/Title (An\341lise do incidente JASMIM\05517)
+/Author (Aegis Agent Lab)
+/Subject (Synthetic fictional knowledge dataset)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents <<
+/Length 1753
+>>
+stream
+BT /F1 10 Tf 54 740 Td 14 TL
+(AN¡LISE DO INCIDENTE JASMIM-17 - INC-007) Tj T*
+() Tj T*
+(Relato inteiramente fictÌcio da organizaÁ„o Aurora Nebula. O incidente JASMIM-17) Tj T*
+(durou 17 minutos, das 09h10 ‡s 09h27 do dia fictÌcio 14 de abril de 2031. O) Tj T*
+(serviÁo documental Lume ficou temporariamente indisponÌvel. N„o houve acesso a) Tj T*
+(dados reais de clientes, pois toda a operaÁ„o deste cen·rio usa documentos) Tj T*
+(sintÈticos.) Tj T*
+() Tj T*
+(Um total de 240 documentos precisou de reprocessamento apÛs o restabelecimento) Tj T*
+(do serviÁo. O replay idempotente n„o criou duplicatas. As verificaÁıes) Tj T*
+(compararam UUIDs, hashes de conte˙do e contagens de fragmentos antes e depois da) Tj T*
+(repetiÁ„o. Incident JASMIM-17 lasted 17 minutes; 240 documents were replayed) Tj T*
+(without creating duplicate records.) Tj T*
+() Tj T*
+(A causa do incidente foi uma configuraÁ„o de timeout incompatÌvel com a primeira) Tj T*
+(carga do modelo documental. A correÁ„o do cen·rio passou a medir inicializaÁ„o) Tj T*
+(separadamente, aplicar preparaÁ„o do serviÁo e manter limites explÌcitos. A) Tj T*
+(investigaÁ„o n„o concluiu que aumentar indefinidamente o timeout seria uma) Tj T*
+(soluÁ„o aceit·vel.) Tj T*
+() Tj T*
+(O time fictÌcio Horizonte realizou a an·lise de causa e o time Brisa validou a) Tj T*
+(recuperaÁ„o. A aÁ„o de melhoria foi adicionar teste de primeira carga, evidÍncia) Tj T*
+(de prontid„o e ensaio de replay. O risco R-14 de RSK-002 foi reduzido pela) Tj T*
+(comprovaÁ„o de deduplicaÁ„o descrita em DOC-006. KPI-003 fornece metas de) Tj T*
+(estudo, sem permitir extrapolar disponibilidade mensal a partir de um ˙nico) Tj T*
+(incidente.) Tj T*
+ET
+BT /F1 9 Tf 54 38 Td
+(Aegis Agent Lab - synthetic fixture - page 1/1) Tj ET
+endstream
+>>
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000015 00000 n 
+0000000175 00000 n 
+0000000234 00000 n 
+0000000283 00000 n 
+trailer
+<<
+/Size 5
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+2273
+%%EOF

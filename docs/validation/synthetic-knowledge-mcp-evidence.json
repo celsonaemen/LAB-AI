@@ -1,0 +1,1460 @@
+{
+  "corpus": "aegis-synthetic-v1",
+  "startedAt": "2026-11-08T14:42:29.473943-03:00",
+  "completedAt": "2026-11-08T14:44:05.247081-03:00",
+  "passed": true,
+  "scope": "full",
+  "sourceEvidence": ".artifacts/synthetic-knowledge-final/acceptance.json",
+  "providerNotice": "Deterministic orchestration; no LLM inference is claimed.",
+  "checkCount": 27,
+  "checks": [
+    {
+      "name": "manifest",
+      "status": "passed",
+      "durationSeconds": 0.003
+    },
+    {
+      "name": "public_readiness",
+      "status": "passed",
+      "durationSeconds": 2.221
+    },
+    {
+      "name": "ingest_and_deduplicate_ARC-001",
+      "status": "passed",
+      "durationSeconds": 2.793
+    },
+    {
+      "name": "ingest_and_deduplicate_RSK-002",
+      "status": "passed",
+      "durationSeconds": 1.001
+    },
+    {
+      "name": "ingest_and_deduplicate_KPI-003",
+      "status": "passed",
+      "durationSeconds": 0.724
+    },
+    {
+      "name": "ingest_and_deduplicate_SEC-004",
+      "status": "passed",
+      "durationSeconds": 0.88
+    },
+    {
+      "name": "ingest_and_deduplicate_DAT-005",
+      "status": "passed",
+      "durationSeconds": 0.677
+    },
+    {
+      "name": "ingest_and_deduplicate_DOC-006",
+      "status": "passed",
+      "durationSeconds": 0.713
+    },
+    {
+      "name": "ingest_and_deduplicate_INC-007",
+      "status": "passed",
+      "durationSeconds": 0.867
+    },
+    {
+      "name": "ingest_and_deduplicate_OPS-008",
+      "status": "passed",
+      "durationSeconds": 0.749
+    },
+    {
+      "name": "ingest_and_deduplicate_BCP-009",
+      "status": "passed",
+      "durationSeconds": 0.667
+    },
+    {
+      "name": "ingest_and_deduplicate_IAM-010",
+      "status": "passed",
+      "durationSeconds": 2.017
+    },
+    {
+      "name": "ingest_and_deduplicate_GLO-011",
+      "status": "passed",
+      "durationSeconds": 1.58
+    },
+    {
+      "name": "ingest_and_deduplicate_ADV-012",
+      "status": "passed",
+      "durationSeconds": 0.583
+    },
+    {
+      "name": "read_only_pgvector_inventory",
+      "status": "passed",
+      "durationSeconds": 0.051
+    },
+    {
+      "name": "mcp_discovery",
+      "status": "passed",
+      "durationSeconds": 5.842
+    },
+    {
+      "name": "search_knowledge_portuguese_english_limit_and_sources",
+      "status": "passed",
+      "durationSeconds": 20.564
+    },
+    {
+      "name": "search_knowledge_context_threshold_and_metadata_bounds",
+      "status": "passed",
+      "durationSeconds": 10.811
+    },
+    {
+      "name": "get_document_and_list_documents",
+      "status": "passed",
+      "durationSeconds": 3.933
+    },
+    {
+      "name": "application_authorization_schema_and_missing_documents",
+      "status": "passed",
+      "durationSeconds": 3.825
+    },
+    {
+      "name": "mcp_server_authorization_schema_and_path_traversal",
+      "status": "passed",
+      "durationSeconds": 7.916
+    },
+    {
+      "name": "get_execution_history_explicit_approval_and_summary_fields",
+      "status": "passed",
+      "durationSeconds": 1.94
+    },
+    {
+      "name": "document_prompt_injection_quarantine",
+      "status": "passed",
+      "durationSeconds": 3.391
+    },
+    {
+      "name": "four_agents_live_sse_approval_and_durability",
+      "status": "passed",
+      "durationSeconds": 11.241
+    },
+    {
+      "name": "cancellation_and_terminal_guards",
+      "status": "passed",
+      "durationSeconds": 7.18
+    },
+    {
+      "name": "request_prompt_injection_audit",
+      "status": "passed",
+      "durationSeconds": 0.668
+    },
+    {
+      "name": "public_history_and_authorized_mcp_history",
+      "status": "passed",
+      "durationSeconds": 2.068
+    }
+  ],
+  "inventory": {
+    "documents": 12,
+    "chunks": 68,
+    "embeddings": 68,
+    "dimensions": [
+      384
+    ],
+    "pgvector": "0.8.7",
+    "migrations": [
+      {
+        "version": "V001__knowledge_schema.sql"
+      },
+      {
+        "version": "V002__knowledge_hnsw.sql"
+      },
+      {
+        "version": "V003__agent_executions.sql"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "document_chunks_pkey",
+        "indexdef": "CREATE UNIQUE INDEX document_chunks_pkey ON knowledge.document_chunks USING btree (id)"
+      },
+      {
+        "indexname": "document_chunks_document_id_ordinal_key",
+        "indexdef": "CREATE UNIQUE INDEX document_chunks_document_id_ordinal_key ON knowledge.document_chunks USING btree (document_id, ordinal)"
+      },
+      {
+        "indexname": "document_chunks_embedding_hnsw",
+        "indexdef": "CREATE INDEX document_chunks_embedding_hnsw ON knowledge.document_chunks USING hnsw (embedding vector_cosine_ops)"
+      }
+    ],
+    "chunkIds": [
+      {
+        "chunkId": "89fc6cc3-fa89-496a-b9b9-c192f3ef0588",
+        "documentId": "1659bb39-9246-4de8-a3e3-a7c65e9f1188",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "91ab3537-88ac-4184-b603-840731efdd67",
+        "documentId": "1659bb39-9246-4de8-a3e3-a7c65e9f1188",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "e371d506-cde9-41aa-bb88-93905aa2a2de",
+        "documentId": "1659bb39-9246-4de8-a3e3-a7c65e9f1188",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "b3ef3512-9252-48bf-887e-890ac143aab4",
+        "documentId": "1659bb39-9246-4de8-a3e3-a7c65e9f1188",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "b92c505c-1994-4394-b512-90c2c9b498e1",
+        "documentId": "1659bb39-9246-4de8-a3e3-a7c65e9f1188",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "5e01bb2e-54fc-45c6-bdf3-25ade23470ac",
+        "documentId": "1659bb39-9246-4de8-a3e3-a7c65e9f1188",
+        "ordinal": 5
+      },
+      {
+        "chunkId": "802d95bb-ee27-4f8e-b7a1-fbcab30d5c61",
+        "documentId": "1b0e7ca2-2f67-4de0-954d-48fa6a54853e",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "f6ea6e28-3f65-437f-856c-def0762fc639",
+        "documentId": "1b0e7ca2-2f67-4de0-954d-48fa6a54853e",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "72f5aa65-30b7-4229-b7fb-0af28c6c2271",
+        "documentId": "1b0e7ca2-2f67-4de0-954d-48fa6a54853e",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "5075679a-66d1-4f65-a376-a3f95f4891b8",
+        "documentId": "1b0e7ca2-2f67-4de0-954d-48fa6a54853e",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "50dd1cc3-4122-41dd-ad5a-992c257a82de",
+        "documentId": "1b0e7ca2-2f67-4de0-954d-48fa6a54853e",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "68f4856c-62ce-44e6-8277-1232649d2e4f",
+        "documentId": "4a69cd6b-2e4b-4152-ab5a-ae7e8fefd44b",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "476b36f7-5196-477a-9d5a-6fd8383f8959",
+        "documentId": "4a69cd6b-2e4b-4152-ab5a-ae7e8fefd44b",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "954bd3c1-04f7-49d7-b9be-ad23aab3ae77",
+        "documentId": "4a69cd6b-2e4b-4152-ab5a-ae7e8fefd44b",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "c7628527-ec35-487c-abcf-ea65c7f30a82",
+        "documentId": "4a69cd6b-2e4b-4152-ab5a-ae7e8fefd44b",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "c79e5edb-fe60-42d9-893b-c153312a70f6",
+        "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "f34655c3-d947-4f24-bad1-ebc0813896e4",
+        "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "7415ba28-43b5-4ed7-909e-75963e22736d",
+        "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "0d5eb0f1-4579-4a72-89ce-081d78a747e3",
+        "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "e58d7246-ac1e-45b2-bffe-d2c6bbd208dc",
+        "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "1bba7dc5-4ee2-4512-9a74-578ef9c94687",
+        "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+        "ordinal": 5
+      },
+      {
+        "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+        "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "32647401-c7e9-47de-95f9-32f5b5927f56",
+        "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+        "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "ca9a56a1-ecf9-4d75-ae95-a352c1249d44",
+        "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "32455e98-7a5d-475b-9d7d-2d71d74b552a",
+        "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "f5cdb578-211e-4b60-9d01-ca414bb1d7c7",
+        "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "fca21dd9-f8f2-4fa0-aa53-fe580d24d03a",
+        "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "650b5f8a-e140-45a1-8b64-d3f631460bee",
+        "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "93001569-e63f-4acd-8bde-d5b58b57168c",
+        "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "6e74f612-3425-463d-8b0a-2249a6295d7f",
+        "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "d25ed4e8-b1de-4208-9274-a2185897a717",
+        "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+        "ordinal": 5
+      },
+      {
+        "chunkId": "ee744b2c-18e4-422d-acf5-c35a676022e9",
+        "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "428f9194-a339-43a1-86b8-a05322bc9e68",
+        "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "f52ee85a-63dc-4bfc-82f6-4ff1ccf2ca4e",
+        "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "83de7aaf-b26a-42e9-b74f-2b79003f6b03",
+        "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "3de1b802-f97e-4356-bc0b-d55bcc8daa85",
+        "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "2c16e0fa-0d8b-4215-b6eb-2e8aefb729ab",
+        "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+        "ordinal": 5
+      },
+      {
+        "chunkId": "0598b818-105b-41b4-95f4-a839e534222d",
+        "documentId": "c3684c10-00eb-4c47-8c65-ab8dd57eccf9",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "1f7c8227-3cfb-49e3-888f-b7cc673f0203",
+        "documentId": "c3684c10-00eb-4c47-8c65-ab8dd57eccf9",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "4458c10d-f77f-4f45-b9e7-410a921248eb",
+        "documentId": "c3684c10-00eb-4c47-8c65-ab8dd57eccf9",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "946c1b9c-d466-4d1c-9c2d-7d6dfb1e700a",
+        "documentId": "c3684c10-00eb-4c47-8c65-ab8dd57eccf9",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "4257264a-7347-4d2f-a02e-dc427354d4fd",
+        "documentId": "c3684c10-00eb-4c47-8c65-ab8dd57eccf9",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "2b941cbd-25dc-4291-92eb-7b6756f7460d",
+        "documentId": "c3684c10-00eb-4c47-8c65-ab8dd57eccf9",
+        "ordinal": 5
+      },
+      {
+        "chunkId": "cd0c3c91-9994-466d-8463-559e0263d37f",
+        "documentId": "c9c6e8c5-fc43-4e87-af1d-1415f0b140a2",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "11d58d19-ee12-439c-993e-0166d5eb44b5",
+        "documentId": "c9c6e8c5-fc43-4e87-af1d-1415f0b140a2",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "26ce9143-1548-42d0-93c9-bafcd8956083",
+        "documentId": "c9c6e8c5-fc43-4e87-af1d-1415f0b140a2",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "375d97c8-22a2-4e49-ab15-0200c8900e29",
+        "documentId": "c9c6e8c5-fc43-4e87-af1d-1415f0b140a2",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "c2e8203c-6954-438a-8979-79b9762e949b",
+        "documentId": "c9c6e8c5-fc43-4e87-af1d-1415f0b140a2",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "47a14372-5d01-4f43-b2d8-23d94edfdc6e",
+        "documentId": "c9c6e8c5-fc43-4e87-af1d-1415f0b140a2",
+        "ordinal": 5
+      },
+      {
+        "chunkId": "5d30782c-e873-4196-8a71-a2379251b1f5",
+        "documentId": "cdca359f-396d-4af0-af7f-fc8031fd4424",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "c4ac3b38-c343-46d7-bf1b-b3657067c07f",
+        "documentId": "cdca359f-396d-4af0-af7f-fc8031fd4424",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "8d2b9704-9d1a-4e75-92e2-39a2f4ba3bb0",
+        "documentId": "cdca359f-396d-4af0-af7f-fc8031fd4424",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "bc7da731-dd10-451c-ab17-2454910aebb6",
+        "documentId": "cdca359f-396d-4af0-af7f-fc8031fd4424",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "dfd9fcfc-e860-4cda-9b2f-16996be3dcc6",
+        "documentId": "cdca359f-396d-4af0-af7f-fc8031fd4424",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "6cac7102-093e-42f5-9686-90d8db784d3b",
+        "documentId": "cdca359f-396d-4af0-af7f-fc8031fd4424",
+        "ordinal": 5
+      },
+      {
+        "chunkId": "ee7c2987-def3-4998-be9d-0a4647914a64",
+        "documentId": "e245bb16-4af9-4224-827a-6102b430f37b",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "10eb081e-64b3-42c3-a6ff-a7f57c8e0761",
+        "documentId": "e245bb16-4af9-4224-827a-6102b430f37b",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "6070cbe2-88c6-4cc5-b90b-5bae8633781b",
+        "documentId": "e245bb16-4af9-4224-827a-6102b430f37b",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "7609dc1b-a098-412d-8b33-38961cc9b9e9",
+        "documentId": "e245bb16-4af9-4224-827a-6102b430f37b",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "3375f68c-9435-4bba-9bee-4fd96ccf59be",
+        "documentId": "e245bb16-4af9-4224-827a-6102b430f37b",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "13f00f06-a398-4477-b626-330bc7753b3b",
+        "documentId": "e245bb16-4af9-4224-827a-6102b430f37b",
+        "ordinal": 5
+      },
+      {
+        "chunkId": "7b9938da-fc0c-491a-893e-f62b230ebf47",
+        "documentId": "ee2de0c6-ecc3-472f-bdee-d54071629e86",
+        "ordinal": 0
+      },
+      {
+        "chunkId": "8fabc05e-fb69-4448-a9c0-0edfff45f814",
+        "documentId": "ee2de0c6-ecc3-472f-bdee-d54071629e86",
+        "ordinal": 1
+      },
+      {
+        "chunkId": "011926a2-7429-4405-8a35-02c1d2be4f4b",
+        "documentId": "ee2de0c6-ecc3-472f-bdee-d54071629e86",
+        "ordinal": 2
+      },
+      {
+        "chunkId": "1063a254-67ef-4188-aeff-2eca3683f451",
+        "documentId": "ee2de0c6-ecc3-472f-bdee-d54071629e86",
+        "ordinal": 3
+      },
+      {
+        "chunkId": "d4c6868f-70c6-421b-b612-fc3ebf43958e",
+        "documentId": "ee2de0c6-ecc3-472f-bdee-d54071629e86",
+        "ordinal": 4
+      },
+      {
+        "chunkId": "8e799770-15db-4a5c-8261-05a25bb8047b",
+        "documentId": "ee2de0c6-ecc3-472f-bdee-d54071629e86",
+        "ordinal": 5
+      }
+    ]
+  },
+  "documents": [
+    {
+      "logicalId": "ARC-001",
+      "file": "01-arquitetura-lume.pdf",
+      "documentId": "c9c6e8c5-fc43-4e87-af1d-1415f0b140a2",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "software-architecture",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "ARC-001",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "RSK-002",
+      "file": "02-riscos-operacionais.md",
+      "documentId": "c3684c10-00eb-4c47-8c65-ab8dd57eccf9",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "operational-risk",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "RSK-002",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "KPI-003",
+      "file": "03-indicadores-slo.txt",
+      "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "performance-indicators",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "KPI-003",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "SEC-004",
+      "file": "04-seguranca-aplicacoes.pdf",
+      "documentId": "e245bb16-4af9-4224-827a-6102b430f37b",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "application-security",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "SEC-004",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "DAT-005",
+      "file": "05-governanca-dados.md",
+      "documentId": "1659bb39-9246-4de8-a3e3-a7c65e9f1188",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "data-governance",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "DAT-005",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "DOC-006",
+      "file": "06-processamento-documental.txt",
+      "documentId": "1b0e7ca2-2f67-4de0-954d-48fa6a54853e",
+      "chunks": 5,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "document-processing",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "DOC-006",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "INC-007",
+      "file": "07-incidente-jasmim.pdf",
+      "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+      "chunks": 5,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "incident-analysis",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "INC-007",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "OPS-008",
+      "file": "08-relatorio-operacional.md",
+      "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "operational-reporting",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "OPS-008",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "BCP-009",
+      "file": "09-continuidade-recuperacao.txt",
+      "documentId": "ee2de0c6-ecc3-472f-bdee-d54071629e86",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "business-continuity",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "BCP-009",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "IAM-010",
+      "file": "10-controle-acesso.pdf",
+      "documentId": "cdca359f-396d-4af0-af7f-fc8031fd4424",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "access-control",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "IAM-010",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "GLO-011",
+      "file": "11-operational-glossary.txt",
+      "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+      "chunks": 6,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "operational-glossary",
+        "attack": "false",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "GLO-011",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    },
+    {
+      "logicalId": "ADV-012",
+      "file": "12-amostra-adversarial.md",
+      "documentId": "4a69cd6b-2e4b-4152-ab5a-ae7e8fefd44b",
+      "chunks": 4,
+      "deduplicatedOnReingestion": true,
+      "metadata": {
+        "theme": "security-adversarial-fixture",
+        "attack": "true",
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "ADV-012",
+        "synthetic": "true",
+        "organization": "Aurora Nebula"
+      }
+    }
+  ],
+  "searches": [
+    {
+      "language": "pt",
+      "scope": "known-document",
+      "limit": 1,
+      "results": [
+        {
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.7749517046822071,
+          "content": "es e depois da\nrepetição. Incident JASMIM-17 lasted 17 minutes; 240 documents were replayed\nwithout creating duplicate records.\nA causa do incidente foi uma configuração de timeout incompatível com a primeira\ncarga do modelo documental. A correção do cenário passou a medir inicialização\nseparadamente, aplicar preparação do serviço e manter limites "
+        }
+      ],
+      "references": [
+        {
+          "reference": "S1",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.7749517046822071
+        }
+      ]
+    },
+    {
+      "language": "pt",
+      "scope": "known-document",
+      "limit": 3,
+      "results": [
+        {
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.7749517046822071,
+          "content": "es e depois da\nrepetição. Incident JASMIM-17 lasted 17 minutes; 240 documents were replayed\nwithout creating duplicate records.\nA causa do incidente foi uma configuração de timeout incompatível com a primeira\ncarga do modelo documental. A correção do cenário passou a medir inicialização\nseparadamente, aplicar preparação do serviço e manter limites "
+        },
+        {
+          "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.6732556919066051,
+          "content": "ANÁLISE DO INCIDENTE JASMIM-17 - INC-007\nRelato inteiramente fictício da organização Aurora Nebula. O incidente JASMIM-17\ndurou 17 minutos, das 09h10 às 09h27 do dia fictício 14 de abril de 2031. O\nserviço documental Lume ficou temporariamente indisponível. Não houve acesso a\ndados reais de clientes, pois toda a operação deste cenário usa documento"
+        },
+        {
+          "chunkId": "32647401-c7e9-47de-95f9-32f5b5927f56",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.5798449927131554,
+          "content": "e clientes, pois toda a operação deste cenário usa documentos\nsintéticos.\nUm total de 240 documentos precisou de reprocessamento após o restabelecimento\ndo serviço. O replay idempotente não criou duplicatas. As verificações\ncompararam UUIDs, hashes de conteúdo e contagens de fragmentos antes e depois da\nrepetição. Incident JASMIM-17 lasted 17 minut"
+        }
+      ],
+      "references": [
+        {
+          "reference": "S1",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.7749517046822071
+        },
+        {
+          "reference": "S2",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.6732556919066051
+        },
+        {
+          "reference": "S3",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "32647401-c7e9-47de-95f9-32f5b5927f56",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.5798449927131554
+        }
+      ]
+    },
+    {
+      "language": "pt",
+      "scope": "whole-safe-corpus",
+      "limit": 5,
+      "results": [
+        {
+          "chunkId": "428f9194-a339-43a1-86b8-a05322bc9e68",
+          "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+          "source": "synthetic/aegis-synthetic-v1/08-relatorio-operacional.md",
+          "score": 0.8579991606947852,
+          "content": "s é executado. O relatório precisa separar fatos documentados, cálculos derivados e informações desconhecidas.\n\n## Incidente e recuperação\n\nO relatório consolida o incidente JASMIM-17, com duração documentada de 17 minutos. Segundo INC-007, 240 documentos foram reprocessados e a deduplicação impediu criação de cópias. R-14 foi mitigado por reproces"
+        },
+        {
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.7749517046822071,
+          "content": "es e depois da\nrepetição. Incident JASMIM-17 lasted 17 minutes; 240 documents were replayed\nwithout creating duplicate records.\nA causa do incidente foi uma configuração de timeout incompatível com a primeira\ncarga do modelo documental. A correção do cenário passou a medir inicialização\nseparadamente, aplicar preparação do serviço e manter limites "
+        },
+        {
+          "chunkId": "0d5eb0f1-4579-4a72-89ce-081d78a747e3",
+          "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+          "source": "synthetic/aegis-synthetic-v1/11-operational-glossary.txt",
+          "score": 0.7649190826940505,
+          "content": " retried without creating another copy. Incident JASMIM-17 in INC-007 lasted 17 minutes and required replay of 240 documents. These are declared scenario facts, not live measurements collected from the application.\n\nA recovery time objective describes the maximum desired restoration delay. A recovery point objective describes the maximum desired da"
+        },
+        {
+          "chunkId": "6e74f612-3425-463d-8b0a-2249a6295d7f",
+          "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+          "source": "synthetic/aegis-synthetic-v1/03-indicadores-slo.txt",
+          "score": 0.7185302455493376,
+          "content": "O incidente JASMIM-17, descrito em INC-007, teve 17 minutos de indisponibilidade. O relatório OPS-008 usa essa duração como fato do cenário. Não há dados suficientes neste corpus para deduzir disponibilidade mensal real. O glossário GLO-011 define diferença entre objetivo, indicador e evidência. Revisores devem preservar essa limitação em qualquer "
+        },
+        {
+          "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.6732556919066051,
+          "content": "ANÁLISE DO INCIDENTE JASMIM-17 - INC-007\nRelato inteiramente fictício da organização Aurora Nebula. O incidente JASMIM-17\ndurou 17 minutos, das 09h10 às 09h27 do dia fictício 14 de abril de 2031. O\nserviço documental Lume ficou temporariamente indisponível. Não houve acesso a\ndados reais de clientes, pois toda a operação deste cenário usa documento"
+        }
+      ],
+      "references": [
+        {
+          "reference": "S1",
+          "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+          "chunkId": "428f9194-a339-43a1-86b8-a05322bc9e68",
+          "title": "Relatório operacional da semana do exercício",
+          "source": "synthetic/aegis-synthetic-v1/08-relatorio-operacional.md",
+          "score": 0.8579991606947852
+        },
+        {
+          "reference": "S2",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.7749517046822071
+        },
+        {
+          "reference": "S3",
+          "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+          "chunkId": "0d5eb0f1-4579-4a72-89ce-081d78a747e3",
+          "title": "English glossary of operational evidence",
+          "source": "synthetic/aegis-synthetic-v1/11-operational-glossary.txt",
+          "score": 0.7649190826940505
+        },
+        {
+          "reference": "S4",
+          "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+          "chunkId": "6e74f612-3425-463d-8b0a-2249a6295d7f",
+          "title": "Indicadores e objetivos de serviço",
+          "source": "synthetic/aegis-synthetic-v1/03-indicadores-slo.txt",
+          "score": 0.7185302455493376
+        },
+        {
+          "reference": "S5",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.6732556919066051
+        }
+      ]
+    },
+    {
+      "language": "en",
+      "scope": "known-document",
+      "limit": 1,
+      "results": [
+        {
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.776937792058593,
+          "content": "es e depois da\nrepetição. Incident JASMIM-17 lasted 17 minutes; 240 documents were replayed\nwithout creating duplicate records.\nA causa do incidente foi uma configuração de timeout incompatível com a primeira\ncarga do modelo documental. A correção do cenário passou a medir inicialização\nseparadamente, aplicar preparação do serviço e manter limites "
+        }
+      ],
+      "references": [
+        {
+          "reference": "S1",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.776937792058593
+        }
+      ]
+    },
+    {
+      "language": "en",
+      "scope": "known-document",
+      "limit": 3,
+      "results": [
+        {
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.776937792058593,
+          "content": "es e depois da\nrepetição. Incident JASMIM-17 lasted 17 minutes; 240 documents were replayed\nwithout creating duplicate records.\nA causa do incidente foi uma configuração de timeout incompatível com a primeira\ncarga do modelo documental. A correção do cenário passou a medir inicialização\nseparadamente, aplicar preparação do serviço e manter limites "
+        },
+        {
+          "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.6620056131340162,
+          "content": "ANÁLISE DO INCIDENTE JASMIM-17 - INC-007\nRelato inteiramente fictício da organização Aurora Nebula. O incidente JASMIM-17\ndurou 17 minutos, das 09h10 às 09h27 do dia fictício 14 de abril de 2031. O\nserviço documental Lume ficou temporariamente indisponível. Não houve acesso a\ndados reais de clientes, pois toda a operação deste cenário usa documento"
+        },
+        {
+          "chunkId": "32647401-c7e9-47de-95f9-32f5b5927f56",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.5834504666821669,
+          "content": "e clientes, pois toda a operação deste cenário usa documentos\nsintéticos.\nUm total de 240 documentos precisou de reprocessamento após o restabelecimento\ndo serviço. O replay idempotente não criou duplicatas. As verificações\ncompararam UUIDs, hashes de conteúdo e contagens de fragmentos antes e depois da\nrepetição. Incident JASMIM-17 lasted 17 minut"
+        }
+      ],
+      "references": [
+        {
+          "reference": "S1",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.776937792058593
+        },
+        {
+          "reference": "S2",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.6620056131340162
+        },
+        {
+          "reference": "S3",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "32647401-c7e9-47de-95f9-32f5b5927f56",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.5834504666821669
+        }
+      ]
+    },
+    {
+      "language": "en",
+      "scope": "whole-safe-corpus",
+      "limit": 5,
+      "results": [
+        {
+          "chunkId": "428f9194-a339-43a1-86b8-a05322bc9e68",
+          "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+          "source": "synthetic/aegis-synthetic-v1/08-relatorio-operacional.md",
+          "score": 0.8404912215843539,
+          "content": "s é executado. O relatório precisa separar fatos documentados, cálculos derivados e informações desconhecidas.\n\n## Incidente e recuperação\n\nO relatório consolida o incidente JASMIM-17, com duração documentada de 17 minutos. Segundo INC-007, 240 documentos foram reprocessados e a deduplicação impediu criação de cópias. R-14 foi mitigado por reproces"
+        },
+        {
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.776937792058593,
+          "content": "es e depois da\nrepetição. Incident JASMIM-17 lasted 17 minutes; 240 documents were replayed\nwithout creating duplicate records.\nA causa do incidente foi uma configuração de timeout incompatível com a primeira\ncarga do modelo documental. A correção do cenário passou a medir inicialização\nseparadamente, aplicar preparação do serviço e manter limites "
+        },
+        {
+          "chunkId": "0d5eb0f1-4579-4a72-89ce-081d78a747e3",
+          "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+          "source": "synthetic/aegis-synthetic-v1/11-operational-glossary.txt",
+          "score": 0.748679679056092,
+          "content": " retried without creating another copy. Incident JASMIM-17 in INC-007 lasted 17 minutes and required replay of 240 documents. These are declared scenario facts, not live measurements collected from the application.\n\nA recovery time objective describes the maximum desired restoration delay. A recovery point objective describes the maximum desired da"
+        },
+        {
+          "chunkId": "6e74f612-3425-463d-8b0a-2249a6295d7f",
+          "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+          "source": "synthetic/aegis-synthetic-v1/03-indicadores-slo.txt",
+          "score": 0.6809453555069677,
+          "content": "O incidente JASMIM-17, descrito em INC-007, teve 17 minutos de indisponibilidade. O relatório OPS-008 usa essa duração como fato do cenário. Não há dados suficientes neste corpus para deduzir disponibilidade mensal real. O glossário GLO-011 define diferença entre objetivo, indicador e evidência. Revisores devem preservar essa limitação em qualquer "
+        },
+        {
+          "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.6620056131340162,
+          "content": "ANÁLISE DO INCIDENTE JASMIM-17 - INC-007\nRelato inteiramente fictício da organização Aurora Nebula. O incidente JASMIM-17\ndurou 17 minutos, das 09h10 às 09h27 do dia fictício 14 de abril de 2031. O\nserviço documental Lume ficou temporariamente indisponível. Não houve acesso a\ndados reais de clientes, pois toda a operação deste cenário usa documento"
+        }
+      ],
+      "references": [
+        {
+          "reference": "S1",
+          "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c",
+          "chunkId": "428f9194-a339-43a1-86b8-a05322bc9e68",
+          "title": "Relatório operacional da semana do exercício",
+          "source": "synthetic/aegis-synthetic-v1/08-relatorio-operacional.md",
+          "score": 0.8404912215843539
+        },
+        {
+          "reference": "S2",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.776937792058593
+        },
+        {
+          "reference": "S3",
+          "documentId": "56de207e-12d3-4a84-8779-78d98697643f",
+          "chunkId": "0d5eb0f1-4579-4a72-89ce-081d78a747e3",
+          "title": "English glossary of operational evidence",
+          "source": "synthetic/aegis-synthetic-v1/11-operational-glossary.txt",
+          "score": 0.748679679056092
+        },
+        {
+          "reference": "S4",
+          "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd",
+          "chunkId": "6e74f612-3425-463d-8b0a-2249a6295d7f",
+          "title": "Indicadores e objetivos de serviço",
+          "source": "synthetic/aegis-synthetic-v1/03-indicadores-slo.txt",
+          "score": 0.6809453555069677
+        },
+        {
+          "reference": "S5",
+          "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76",
+          "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+          "title": "Análise do incidente JASMIM-17",
+          "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+          "score": 0.6620056131340162
+        }
+      ]
+    }
+  ],
+  "bounds": {
+    "requestedContextChars": 400,
+    "actualContextChars": 399,
+    "strictMinScore": 1,
+    "strictThresholdHits": 0,
+    "unmatchedMetadataHits": 0
+  },
+  "security": {
+    "applicationCases": [
+      {
+        "tool": "get_document",
+        "agent": "data-agent",
+        "code": "tool_failed",
+        "blocked": true
+      },
+      {
+        "tool": "get_document",
+        "agent": "data-agent",
+        "code": "invalid_tool_arguments",
+        "blocked": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "risk-agent",
+        "code": "tool_not_allowed",
+        "blocked": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "analytics-agent",
+        "code": "tool_not_allowed",
+        "blocked": true
+      },
+      {
+        "tool": "get_execution_history",
+        "agent": "data-agent",
+        "code": "tool_not_allowed",
+        "blocked": true
+      },
+      {
+        "tool": "get_execution_history",
+        "agent": "report-agent",
+        "code": "approval_required",
+        "blocked": true
+      },
+      {
+        "tool": "get_execution_history",
+        "agent": "report-agent",
+        "code": "approval_required",
+        "blocked": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "data-agent",
+        "code": "invalid_tool_arguments",
+        "blocked": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "data-agent",
+        "code": "invalid_tool_arguments",
+        "blocked": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "data-agent",
+        "code": "invalid_tool_arguments",
+        "blocked": true
+      },
+      {
+        "tool": "search_knowledge",
+        "agent": "data-agent",
+        "code": "invalid_tool_arguments",
+        "blocked": true
+      },
+      {
+        "tool": "search_knowledge",
+        "agent": "data-agent",
+        "code": "invalid_tool_arguments",
+        "blocked": true
+      },
+      {
+        "tool": "search_knowledge",
+        "agent": "data-agent",
+        "code": "invalid_tool_arguments",
+        "blocked": true
+      },
+      {
+        "tool": "search_knowledge",
+        "agent": "data-agent",
+        "code": "tool_failed",
+        "blocked": true
+      },
+      {
+        "tool": "shell",
+        "agent": "data-agent",
+        "code": "unknown_tool",
+        "blocked": true
+      }
+    ],
+    "serverCases": [
+      {
+        "tool": "get_document",
+        "agent": "data-agent",
+        "blocked": true,
+        "inputKeys": [
+          "document_id"
+        ],
+        "isError": true
+      },
+      {
+        "tool": "get_document",
+        "agent": "data-agent",
+        "blocked": true,
+        "inputKeys": [
+          "document_id"
+        ],
+        "isError": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "data-agent",
+        "blocked": true,
+        "inputKeys": [
+          "limit"
+        ],
+        "isError": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "data-agent",
+        "blocked": true,
+        "inputKeys": [
+          "approved"
+        ],
+        "isError": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "data-agent",
+        "blocked": true,
+        "inputKeys": [
+          "url"
+        ],
+        "isError": true
+      },
+      {
+        "tool": "search_knowledge",
+        "agent": "data-agent",
+        "blocked": true,
+        "inputKeys": [
+          "maxContextChars",
+          "query"
+        ],
+        "isError": true
+      },
+      {
+        "tool": "search_knowledge",
+        "agent": "data-agent",
+        "blocked": true,
+        "inputKeys": [
+          "query"
+        ],
+        "isError": true
+      },
+      {
+        "tool": "shell",
+        "agent": "data-agent",
+        "blocked": true,
+        "inputKeys": [],
+        "isError": true
+      },
+      {
+        "tool": "list_documents",
+        "agent": "risk-agent",
+        "blocked": true,
+        "inputKeys": [],
+        "isError": true
+      },
+      {
+        "tool": "get_document",
+        "agent": "analytics-agent",
+        "blocked": true,
+        "inputKeys": [
+          "document_id"
+        ],
+        "isError": true
+      },
+      {
+        "tool": "get_execution_history",
+        "agent": "report-agent",
+        "blocked": true,
+        "inputKeys": [],
+        "isError": true
+      },
+      {
+        "tool": "get_execution_history",
+        "agent": "report-agent",
+        "blocked": true,
+        "inputKeys": [
+          "approved"
+        ],
+        "isError": true
+      }
+    ],
+    "quarantinedLogicalId": "ADV-012",
+    "quarantinedChunkCount": 4
+  },
+  "multiagentRuns": [
+    {
+      "executionId": "b8a91b91-37f6-48ba-b494-3f04c899654b",
+      "state": "Completed",
+      "provider": "deterministic",
+      "agentStates": [
+        {
+          "id": "data-agent",
+          "state": "Completed"
+        },
+        {
+          "id": "risk-agent",
+          "state": "Completed"
+        },
+        {
+          "id": "analytics-agent",
+          "state": "Completed"
+        },
+        {
+          "id": "report-agent",
+          "state": "Completed"
+        }
+      ],
+      "eventCount": 26,
+      "eventTypes": [
+        "ExecutionCreated",
+        "ExecutionStarted",
+        "AgentStarted",
+        "ToolStarted",
+        "McpDiscovered",
+        "ToolCallRequested",
+        "McpToolStarted",
+        "McpToolCompleted",
+        "ToolCompleted",
+        "AgentCompleted",
+        "AgentStarted",
+        "ToolStarted",
+        "ToolCompleted",
+        "AgentCompleted",
+        "AgentStarted",
+        "ToolStarted",
+        "ToolCompleted",
+        "AgentCompleted",
+        "ApprovalRequested",
+        "ExecutionApproved",
+        "ExecutionStarted",
+        "AgentStarted",
+        "ProviderStarted",
+        "ProviderCompleted",
+        "AgentCompleted",
+        "ExecutionCompleted"
+      ],
+      "reportSummary": "Deterministic report (no LLM inference). Retrieved 5 chunks; review the cited evidence and limitations."
+    },
+    {
+      "executionId": "e0fcc218-8609-4e0f-8eb7-1d4b327fcedc",
+      "state": "Cancelled",
+      "provider": "deterministic",
+      "agentStates": [
+        {
+          "id": "data-agent",
+          "state": "Completed"
+        },
+        {
+          "id": "risk-agent",
+          "state": "Completed"
+        },
+        {
+          "id": "analytics-agent",
+          "state": "Completed"
+        },
+        {
+          "id": "report-agent",
+          "state": "Cancelled"
+        }
+      ],
+      "eventCount": 20,
+      "eventTypes": [
+        "ExecutionCreated",
+        "ExecutionStarted",
+        "AgentStarted",
+        "ToolStarted",
+        "McpDiscovered",
+        "ToolCallRequested",
+        "McpToolStarted",
+        "McpToolCompleted",
+        "ToolCompleted",
+        "AgentCompleted",
+        "AgentStarted",
+        "ToolStarted",
+        "ToolCompleted",
+        "AgentCompleted",
+        "AgentStarted",
+        "ToolStarted",
+        "ToolCompleted",
+        "AgentCompleted",
+        "ApprovalRequested",
+        "ExecutionCancelled"
+      ],
+      "reportSummary": null
+    },
+    {
+      "executionId": "b94e1ec5-a508-4721-a8cb-a7460bff95f3",
+      "state": "Failed",
+      "provider": "deterministic",
+      "agentStates": [
+        {
+          "id": "data-agent",
+          "state": "Skipped"
+        },
+        {
+          "id": "risk-agent",
+          "state": "Skipped"
+        },
+        {
+          "id": "analytics-agent",
+          "state": "Skipped"
+        },
+        {
+          "id": "report-agent",
+          "state": "Skipped"
+        }
+      ],
+      "eventCount": 4,
+      "eventTypes": [
+        "ExecutionCreated",
+        "ExecutionStarted",
+        "GuardrailBlocked",
+        "ExecutionFailed"
+      ],
+      "reportSummary": null
+    }
+  ],
+  "liveSse": {
+    "executionId": "b8a91b91-37f6-48ba-b494-3f04c899654b",
+    "persistedEventCount": 26,
+    "streamedSequences": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "replayedSequences": [
+      25,
+      26
+    ],
+    "references": [
+      {
+        "score": 0.8579991606947852,
+        "title": "Relatório operacional da semana do exercício",
+        "source": "synthetic/aegis-synthetic-v1/08-relatorio-operacional.md",
+        "chunkId": "428f9194-a339-43a1-86b8-a05322bc9e68",
+        "reference": "S1",
+        "documentId": "b48f5152-9cc7-4d83-8f1e-b9dfd786fc1c"
+      },
+      {
+        "score": 0.7749517046822071,
+        "title": "Análise do incidente JASMIM-17",
+        "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+        "chunkId": "3cf9a856-da3f-4cb6-93c3-6f09d7855b8c",
+        "reference": "S2",
+        "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76"
+      },
+      {
+        "score": 0.7649190826940505,
+        "title": "English glossary of operational evidence",
+        "source": "synthetic/aegis-synthetic-v1/11-operational-glossary.txt",
+        "chunkId": "0d5eb0f1-4579-4a72-89ce-081d78a747e3",
+        "reference": "S3",
+        "documentId": "56de207e-12d3-4a84-8779-78d98697643f"
+      },
+      {
+        "score": 0.7185302455493376,
+        "title": "Indicadores e objetivos de serviço",
+        "source": "synthetic/aegis-synthetic-v1/03-indicadores-slo.txt",
+        "chunkId": "6e74f612-3425-463d-8b0a-2249a6295d7f",
+        "reference": "S4",
+        "documentId": "7551666a-71f1-40a0-9303-2f33512ceecd"
+      },
+      {
+        "score": 0.6732556919066051,
+        "title": "Análise do incidente JASMIM-17",
+        "source": "synthetic/aegis-synthetic-v1/07-incidente-jasmim.pdf",
+        "chunkId": "fc01731f-23de-4bb3-8d9d-ec7f64e8cef9",
+        "reference": "S5",
+        "documentId": "6c25aac9-349f-4684-a56d-0c85fd781d76"
+      }
+    ]
+  },
+  "browserEvidence": "docs/validation/synthetic-knowledge-browser.json",
+  "regressionResults": {
+    "pythonPassed": 77,
+    "pythonSkipped": 0,
+    "dotnetPassed": 47,
+    "angularPassed": 20,
+    "angularBuildKilobytes": 356.71,
+    "ciRerun": false,
+    "notice": "Regression suites executed separately by the primary agent; no commit or push in this task."
+  }
+}

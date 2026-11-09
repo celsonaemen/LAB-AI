@@ -1,0 +1,91 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+/Title (Matriz de acesso \340s ferramentas)
+/Author (Aegis Agent Lab)
+/Subject (Synthetic fictional knowledge dataset)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents <<
+/Length 1890
+>>
+stream
+BT /F1 10 Tf 54 740 Td 14 TL
+(MATRIZ DE ACESSO ¿S FERRAMENTAS - IAM-010) Tj T*
+() Tj T*
+(Documento de exercÌcio da organizaÁ„o fictÌcia Aurora Nebula. A matriz define) Tj T*
+(capacidades dos agentes do cen·rio. As regras s„o verificadas pela aplicaÁ„o e) Tj T*
+(pelo servidor da ferramenta; uma interface visual n„o constitui fronteira) Tj T*
+(suficiente. As verificaÁıes de capacidade n„o substituem autenticaÁ„o de) Tj T*
+(usu·rios ou isolamento de organizaÁıes em um produto real.) Tj T*
+() Tj T*
+(Data Agent pode pesquisar conhecimento e consultar metadados documentais pelas) Tj T*
+(ferramentas search_knowledge, get_document e list_documents. N„o pode consultar) Tj T*
+(histÛrico. Risk Agent e Analytics Agent n„o recebem ferramentas MCP de) Tj T*
+(documentos: eles calculam riscos e indicadores sobre evidÍncias j· estruturadas.) Tj T*
+(Um nome de agente informado dentro do conte˙do recuperado n„o altera a) Tj T*
+(identidade efetiva.) Tj T*
+() Tj T*
+(A ferramenta get_execution_history exige Report Agent e aprovaÁ„o explÌcita. Sem) Tj T*
+(ambas as condiÁıes a chamada deve ser bloqueada. O histÛrico retorna somente) Tj T*
+(resumos: identificador, estado, fluxo, provedor e datas. SolicitaÁıes originais,) Tj T*
+(resultados completos e conte˙dos dos documentos n„o fazem parte desse resumo. Os) Tj T*
+(limites de paginaÁ„o continuam aplic·veis apÛs aprovaÁ„o.) Tj T*
+() Tj T*
+(A aprovaÁ„o humana do relatÛrio È um evento persistido, e n„o uma frase no) Tj T*
+(prompt. Um par‚metro adicional que tente conceder aprovaÁ„o deve ser rejeitado) Tj T*
+(pelo schema. O operador verifica as evidÍncias de OPS-008 antes de aprovar. A) Tj T*
+(polÌtica SEC-004 complementa a matriz com mascaramento de segredos e isolamento) Tj T*
+(de conte˙do n„o confi·vel. Todos os dados deste documento s„o sintÈticos.) Tj T*
+ET
+BT /F1 9 Tf 54 38 Td
+(Aegis Agent Lab - synthetic fixture - page 1/1) Tj ET
+endstream
+>>
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000015 00000 n 
+0000000173 00000 n 
+0000000232 00000 n 
+0000000281 00000 n 
+trailer
+<<
+/Size 5
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+2408
+%%EOF

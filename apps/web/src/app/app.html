@@ -1,7 +1,7 @@
-<header><a href="#main" class="skip">Ir para o conteúdo</a><span class="wordmark">AEGIS / LAB</span><span>Base de conhecimento</span></header>
+<header><a href="#main" class="skip">Ir para o conteúdo</a><div><span class="wordmark">AEGIS</span><span class="product-name">Intelligence Workspace</span></div><div class="environment"><span>Homologação</span><strong>Aurora Bank · dados sintéticos</strong></div></header>
 <main id="main">
-  <nav class="sections" aria-label="Áreas do laboratório"><button type="button" (click)="section.set('knowledge')" [attr.aria-pressed]="section() === 'knowledge'">Base de conhecimento</button><button type="button" (click)="section.set('agents')" [attr.aria-pressed]="section() === 'agents'">Execuções de agentes</button></nav>
-  @if (section() === 'agents') { <app-executions /> } @else {
+  <nav class="sections" aria-label="Áreas do laboratório"><button type="button" (click)="section.set('bank')" [attr.aria-pressed]="section() === 'bank'">Análise de clientes</button><button type="button" (click)="section.set('knowledge')" [attr.aria-pressed]="section() === 'knowledge'">Base de conhecimento</button><button type="button" (click)="section.set('agents')" [attr.aria-pressed]="section() === 'agents'">Execuções de agentes</button></nav>
+  @if (section() === 'bank') { <app-bank-operations /> } @else if (section() === 'agents') { <app-executions /> } @else {
   <div class="intro"><h1>AEGIS AGENT LAB</h1><p>Encontre evidências nos seus documentos.</p><p class="muted">Busca semântica com fontes rastreáveis. Esta etapa recupera trechos; não gera respostas com LLM.</p></div>
   <div class="workspace">
     <section class="ingestion" aria-labelledby="upload-heading">
@@ -43,6 +43,6 @@
   </div>
   }
 </main>
-<footer>Ambiente local de demonstração · Recuperação de evidências</footer>
+<footer><span>Ambiente de homologação · Somente dados fictícios</span><span>Built by <strong>gutocodes</strong> · SHA-256 da release disponível na API</span></footer>
 
 

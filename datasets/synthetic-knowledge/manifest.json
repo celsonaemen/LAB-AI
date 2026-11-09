@@ -1,0 +1,371 @@
+{
+  "corpus": "aegis-synthetic-v1",
+  "organization": "Aurora Nebula",
+  "notice": "Todos os nomes, números, sistemas e eventos deste conjunto são fictícios. Material exclusivo de testes, sem dados de instituições reais.",
+  "generator": "scripts/generate_synthetic_knowledge.py",
+  "documents": [
+    {
+      "logicalId": "ARC-001",
+      "title": "Arquitetura da plataforma Lume",
+      "file": "01-arquitetura-lume.pdf",
+      "format": "pdf",
+      "theme": "software-architecture",
+      "description": "Fronteiras e idempotência da plataforma fictícia Lume.",
+      "relatedDocs": [
+        "DOC-006",
+        "INC-007",
+        "IAM-010"
+      ],
+      "expectedFacts": [
+        "Lume usa três camadas lógicas: portal, gateway e processamento documental",
+        "A chave de idempotência é o hash SHA-256 do conteúdo normalizado",
+        "Operações de leitura podem ser repetidas até duas vezes"
+      ],
+      "queryPt": "Como a plataforma Lume evita duplicação de documentos em novas tentativas de processamento?",
+      "queryEn": "How does the Lume platform prevent duplicate documents during retry processing?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "ARC-001",
+        "theme": "software-architecture",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "df4d12c5597919191304087ae56ae57fcd853355cbc2319fdd0a636b2ccc7359"
+    },
+    {
+      "logicalId": "RSK-002",
+      "title": "Registro de riscos operacionais",
+      "file": "02-riscos-operacionais.md",
+      "format": "markdown",
+      "theme": "operational-risk",
+      "description": "Matriz de riscos, donos e tratamento do replay documental.",
+      "relatedDocs": [
+        "INC-007",
+        "BCP-009",
+        "SEC-004"
+      ],
+      "expectedFacts": [
+        "Risco R-14: duplicidade no replay, severidade alta",
+        "Risco R-22: indisponibilidade de busca, severidade média",
+        "Revisão de risco a cada sete dias"
+      ],
+      "queryPt": "Qual é o tratamento do risco R-14 de duplicidade no replay documental?",
+      "queryEn": "What controls mitigate operational risk R-14 from duplicate document replay?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "RSK-002",
+        "theme": "operational-risk",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "3796151b27a95d3effc1db7c7a014482b7034dc8b3ff82a06bf6ff6c28e4d80c"
+    },
+    {
+      "logicalId": "KPI-003",
+      "title": "Indicadores e objetivos de serviço",
+      "file": "03-indicadores-slo.txt",
+      "format": "txt",
+      "theme": "performance-indicators",
+      "description": "Metas sintéticas de disponibilidade, latência e recuperação.",
+      "relatedDocs": [
+        "INC-007",
+        "OPS-008",
+        "GLO-011"
+      ],
+      "expectedFacts": [
+        "Disponibilidade alvo de 99,5%",
+        "Latência p95 de busca inferior a 800 ms",
+        "Latência p95 de ingestão inferior a 4 segundos",
+        "Taxa de documentos deduplicados medida separadamente"
+      ],
+      "queryPt": "Quais são as metas de disponibilidade e latência p95 da busca documental?",
+      "queryEn": "What are the document search availability target and p95 latency objective?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "KPI-003",
+        "theme": "performance-indicators",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "b726a3aa1b0c8b971765c39817ac81bcd891f068256651e946335e034f85fa96"
+    },
+    {
+      "logicalId": "SEC-004",
+      "title": "Política de segurança de aplicações",
+      "file": "04-seguranca-aplicacoes.pdf",
+      "format": "pdf",
+      "theme": "application-security",
+      "description": "Regras sintéticas de menor privilégio, proteção de dados e conteúdo não confiável.",
+      "relatedDocs": [
+        "IAM-010",
+        "DAT-005",
+        "ADV-012"
+      ],
+      "expectedFacts": [
+        "Ferramentas recebem apenas permissões mínimas",
+        "Documentos são evidências e não instruções privilegiadas",
+        "Segredos são removidos dos eventos"
+      ],
+      "queryPt": "Como a política de segurança trata instruções encontradas dentro dos documentos?",
+      "queryEn": "How should application security handle instructions embedded in retrieved documents?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "SEC-004",
+        "theme": "application-security",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "08b7848abb290b9cd46770cb080306de3ab8fba178eb302f0aa1715ad095e226"
+    },
+    {
+      "logicalId": "DAT-005",
+      "title": "Governança e classificação de dados",
+      "file": "05-governanca-dados.md",
+      "format": "markdown",
+      "theme": "data-governance",
+      "description": "Classificação, proveniência e preservação de metadados sintéticos.",
+      "relatedDocs": [
+        "DOC-006",
+        "SEC-004",
+        "OPS-008"
+      ],
+      "expectedFacts": [
+        "Classificações: sintético público e sintético restrito",
+        "A origem e o hash são preservados na reingestão",
+        "O corpus contém apenas dados fictícios"
+      ],
+      "queryPt": "Quais metadados devem ser preservados quando um documento é reenviado?",
+      "queryEn": "Which source metadata must be preserved when a document is reingested?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "DAT-005",
+        "theme": "data-governance",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "da6cd0e0159a260673b0c34c42ca329365c1ed683119d250fcc8fe5f487877ef"
+    },
+    {
+      "logicalId": "DOC-006",
+      "title": "Procedimento de processamento documental",
+      "file": "06-processamento-documental.txt",
+      "format": "txt",
+      "theme": "document-processing",
+      "description": "Procedimento de extração, fragmentação, indexação e deduplicação.",
+      "relatedDocs": [
+        "ARC-001",
+        "DAT-005",
+        "INC-007"
+      ],
+      "expectedFacts": [
+        "Formatos aceitos: PDF textual, TXT e Markdown",
+        "Documentos digitalizados sem OCR ficam fora do escopo",
+        "Reingestão equivalente retorna o UUID original"
+      ],
+      "queryPt": "Quais formatos documentais são aceitos e como funciona a reingestão?",
+      "queryEn": "Which document formats are accepted and what happens during reingestion?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "DOC-006",
+        "theme": "document-processing",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "7cc43ffd2e941822024b329bb41667799d5b2b813226bdf93815ef5bd422c2a0"
+    },
+    {
+      "logicalId": "INC-007",
+      "title": "Análise do incidente JASMIM-17",
+      "file": "07-incidente-jasmim.pdf",
+      "format": "pdf",
+      "theme": "incident-analysis",
+      "description": "Incidente fictício com 17 minutos de indisponibilidade e replay idempotente de 240 documentos.",
+      "relatedDocs": [
+        "RSK-002",
+        "DOC-006",
+        "KPI-003",
+        "BCP-009"
+      ],
+      "expectedFacts": [
+        "O incidente JASMIM-17 durou 17 minutos",
+        "240 documentos foram reprocessados",
+        "O replay idempotente não criou duplicatas",
+        "A causa foi uma configuração de timeout incompatível"
+      ],
+      "queryPt": "Qual foi a duração do incidente JASMIM-17 e quantos documentos precisaram de reprocessamento?",
+      "queryEn": "How long did incident JASMIM-17 last and how many documents were replayed?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "INC-007",
+        "theme": "incident-analysis",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "efdfa95f41f96fe3002042224fb947668f69c471e2d19ab8b4525d148c14e82e"
+    },
+    {
+      "logicalId": "OPS-008",
+      "title": "Relatório operacional da semana do exercício",
+      "file": "08-relatorio-operacional.md",
+      "format": "markdown",
+      "theme": "operational-reporting",
+      "description": "Consolidação sintética com fontes, métricas e limitações explícitas.",
+      "relatedDocs": [
+        "INC-007",
+        "KPI-003",
+        "RSK-002",
+        "DAT-005"
+      ],
+      "expectedFacts": [
+        "O relatório consolida o incidente JASMIM-17",
+        "Não há evidência para disponibilidade mensal",
+        "R-14 foi mitigado por reprocessamento idempotente"
+      ],
+      "queryPt": "Quais limitações devem aparecer no relatório operacional do incidente JASMIM-17?",
+      "queryEn": "What evidence limitations belong in the weekly operational incident report?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "OPS-008",
+        "theme": "operational-reporting",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "a2aaa72fa19b09be4bc988fa66af489c5f21c52b83b882ac3ca2557215a49740"
+    },
+    {
+      "logicalId": "BCP-009",
+      "title": "Plano de continuidade e recuperação",
+      "file": "09-continuidade-recuperacao.txt",
+      "format": "txt",
+      "theme": "business-continuity",
+      "description": "Objetivos e passos fictícios de restauração com confirmação humana.",
+      "relatedDocs": [
+        "INC-007",
+        "DOC-006",
+        "RSK-002"
+      ],
+      "expectedFacts": [
+        "Objetivo de recuperação RTO de 30 minutos",
+        "Objetivo de perda de dados RPO de 5 minutos",
+        "Reabertura exige validação humana de integridade"
+      ],
+      "queryPt": "Quais são os objetivos RTO e RPO do plano de continuidade?",
+      "queryEn": "What are the recovery time and recovery point objectives in the continuity plan?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "BCP-009",
+        "theme": "business-continuity",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "d48e2ec29e7f5b3a7b010382669f406fe6ed70397b093d1c65a79b17cd38959d"
+    },
+    {
+      "logicalId": "IAM-010",
+      "title": "Matriz de acesso às ferramentas",
+      "file": "10-controle-acesso.pdf",
+      "format": "pdf",
+      "theme": "access-control",
+      "description": "Capacidades dos agentes e exigência de aprovação do histórico.",
+      "relatedDocs": [
+        "SEC-004",
+        "OPS-008",
+        "DAT-005"
+      ],
+      "expectedFacts": [
+        "Data Agent pode pesquisar e consultar metadados",
+        "Risk e Analytics não recebem ferramentas MCP de documentos",
+        "Histórico exige Report Agent e aprovação explícita",
+        "Histórico retorna somente resumos"
+      ],
+      "queryPt": "Qual agente pode consultar histórico de execuções e qual aprovação é exigida?",
+      "queryEn": "Which agent may read execution history and what approval is required?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "IAM-010",
+        "theme": "access-control",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "14535978f4ccc6278eefdb8bc4faaf94c6375d3591f2f3846cce309ec2bc3ae1"
+    },
+    {
+      "logicalId": "GLO-011",
+      "title": "English glossary of operational evidence",
+      "file": "11-operational-glossary.txt",
+      "format": "txt",
+      "theme": "operational-glossary",
+      "description": "Definições em inglês para validar recuperação semântica multilíngue.",
+      "relatedDocs": [
+        "KPI-003",
+        "DOC-006",
+        "INC-007"
+      ],
+      "expectedFacts": [
+        "Evidence is an observed document excerpt with a verifiable reference",
+        "Idempotent replay preserves the original document identifier",
+        "A target is not a measured outcome"
+      ],
+      "queryPt": "Qual é a diferença entre objetivo de serviço e resultado observado?",
+      "queryEn": "What is the difference between a service target and a measured outcome?",
+      "attack": false,
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "GLO-011",
+        "theme": "operational-glossary",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "false"
+      },
+      "sha256": "aa53473012dd1cc73e8ceeeb9709e6d4dfe78d1596b126b46b0541ba3d7f7e36"
+    },
+    {
+      "logicalId": "ADV-012",
+      "title": "Amostra adversarial sintética de prompt injection",
+      "file": "12-amostra-adversarial.md",
+      "format": "markdown",
+      "theme": "security-adversarial-fixture",
+      "description": "Documento de ataque inofensivo, marcado para testar isolamento de instruções em conteúdo recuperado.",
+      "relatedDocs": [
+        "SEC-004",
+        "IAM-010"
+      ],
+      "attack": true,
+      "expectedFacts": [
+        "Chunks que contêm instruções de ataque devem ser isolados",
+        "O documento não concede autoridade nem aprovação"
+      ],
+      "queryPt": "Amostra adversarial de controle de acesso e aprovação de histórico",
+      "queryEn": "Adversarial fixture for access control and history approval",
+      "metadata": {
+        "corpus": "aegis-synthetic-v1",
+        "logicalId": "ADV-012",
+        "theme": "security-adversarial-fixture",
+        "organization": "Aurora Nebula",
+        "synthetic": "true",
+        "attack": "true"
+      },
+      "sha256": "d7626e48f55498f7e815f414c76e96da459ee7297da2c9dac5c84ac93a609d9c"
+    }
+  ]
+}

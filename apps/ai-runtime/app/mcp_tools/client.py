@@ -50,7 +50,7 @@ async def _request(name=None, arguments=None, agent_id='data-agent', approved=Fa
                 if name in {'list_documents', 'get_execution_history'} and isinstance(value, dict):
                     value = value.get('result')
                 from app.executions.guardrails import redact, filter_evidence
-                value = filter_evidence(value) if name == 'search_knowledge' else value
+                value = filter_evidence(value, arguments.get('maxContextChars', 6000)) if name == 'search_knowledge' else value
                 return validate_output(name, redact(value))
     except Exception as error:
         # Context-manager TaskGroups wrap handler errors in ExceptionGroups.

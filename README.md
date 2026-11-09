@@ -10,7 +10,9 @@ The platform exposes a real local MCP server through the official Python SDK (`m
 
 Guardrails reject prompt injection, unauthorized tools, invalid arguments, authority overrides, metadata-scope widening, invented citations and excessive calls, rounds or output. Retrieved documents remain untrusted evidence and sensitive values are redacted.
 
-Post-renaming regression on 2026-11-08: **64 Python, 47 .NET and 20 Angular tests passed**. Live MCP discovery passed through FastAPI and .NET. A deterministic public execution reached actual MCP invocation, but its first semantic search exceeded the 45-second FastEmbed cold-start budget and failed safely. No Ollama model is configured, so real LLM-selected Tool Calling is implemented but **not claimed as validated**. See [Stage 3 validation](docs/validation/stage-3-mcp.md).
+Latest local validation on 2026-11-08: **77 Python, 47 .NET and 20 Angular tests passed**. A corpus of **12 synthetic PDF/TXT/Markdown documents produced 68 persisted chunks and real 384-dimensional embeddings**. All **27 end-to-end acceptance checks passed**, including .NET ingestion, pgvector verification, the four MCP tools, client/server security, document quarantine, multiagent evidence, live SSE, approval and cancellation. The Angular interface also completed an observed browser execution through approval to all four agents completing.
+
+The earlier MCP startup, structured-output and context-budget failures were reproduced and corrected. See the [synthetic knowledge validation and reproduction commands](docs/validation/synthetic-knowledge-mcp.md), [manifest](datasets/synthetic-knowledge/manifest.json) and [browser evidence](docs/validation/synthetic-knowledge-browser.json). The [earlier Stage 3 report](docs/validation/stage-3-mcp.md) records the preceding state. No Ollama model is configured, so real LLM-selected Tool Calling remains **unvalidated**; these executions explicitly use the deterministic provider.
 
 ## Preserved delivery: Stage 2 — traceable agent orchestration
 

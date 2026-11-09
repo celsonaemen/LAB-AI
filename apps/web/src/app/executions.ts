@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
+import { VOICE_CONSOLE } from './voice-console';
 
 export interface Execution {
   id: string; task: string; workflow: string; portfolioId: string; state: string;
@@ -19,6 +20,7 @@ export const EXECUTION_STREAM = new InjectionToken<(url: string) => Stream>('exe
 export class Executions implements OnDestroy {
   private readonly http = inject(HttpClient);
   private readonly openStream = inject(EXECUTION_STREAM);
+  private readonly voice = inject(VOICE_CONSOLE);
   private stream: Stream | null = null;
   private timer: ReturnType<typeof setTimeout> | null = null;
   private generation = 0;
@@ -33,6 +35,24 @@ export class Executions implements OnDestroy {
   readonly error = signal(''); readonly connection = signal('');
   readonly tools = signal<ToolDescriptor[]>([]);
   readonly toolsBusy = signal(false); readonly toolsLoaded = signal(false); readonly toolsError = signal('');
+  readonly narration = signal(false); readonly listening = signal(false); readonly voiceMessage = signal('');
+  readonly canSpeak = this.voice.canSpeak; readonly canListen = this.voice.canListen;
+  toggleNarration(): void {
+    if (!this.canSpeak) { this.voiceMessage.set('A narração não está disponível neste navegador.'); return; }
+    const enabled = !this.narration(); this.narration.set(enabled);
+    this.voiceMessage.set(enabled ? 'Narração ativada. Apenas estados operacionais serão lidos.' : 'Narração desativada.');
+    if (enabled) this.voice.speak('Narração operacional ativada.'); else this.voice.stop();
+  }
+  async dictateTask(): Promise<void> {
+    if (!this.canListen || this.listening()) { this.voiceMessage.set('O ditado não está disponível neste navegador.'); return; }
+    this.listening.set(true); this.voiceMessage.set('Ouvindo uma tarefa…');
+    try {
+      const transcript = await this.voice.listen();
+      if (transcript) { this.task = transcript.slice(0, 500); this.voiceMessage.set('Tarefa transcrita. Revise antes de iniciar.'); }
+      else this.voiceMessage.set('Nenhuma fala foi reconhecida. Tente novamente.');
+    } catch { this.voiceMessage.set('Não foi possível reconhecer a fala. Verifique a permissão do microfone.'); }
+    finally { this.listening.set(false); }
+  }
   async discoverTools(): Promise<void> {
     if (this.toolsBusy()) return;
     this.toolsBusy.set(true); this.toolsError.set('');
@@ -43,7 +63,7 @@ export class Executions implements OnDestroy {
     finally { this.toolsBusy.set(false); }
   }
   eventLabel(type: string): string {
-    return ({ McpDiscovered: 'Ferramentas MCP descobertas', ToolCallRequested: 'Chamada de ferramenta solicitada', McpToolStarted: 'Ferramenta MCP iniciada', McpToolCompleted: 'Ferramenta MCP concluída', GuardrailBlocked: 'Bloqueado por segurança', ModelStarted: 'Inferência iniciada', ModelCompleted: 'Inferência concluída', ModelFailed: 'Falha de inferência', ModelRequested: 'Solicitação ao modelo', ModelResponse: 'Resposta do modelo' } as Record<string, string>)[type] ?? type;
+    return ({ ExecutionCreated: 'Execução criada', ExecutionStarted: 'Execução iniciada', AgentStarted: 'Agente iniciado', AgentCompleted: 'Agente concluído', AgentFailed: 'Agente falhou', ApprovalRequested: 'Aprovação humana solicitada', ExecutionCompleted: 'Execução concluída', ExecutionFailed: 'Execução falhou', ExecutionCancelled: 'Execução cancelada', McpDiscovered: 'Ferramentas MCP descobertas', ToolCallRequested: 'Chamada de ferramenta solicitada', McpToolStarted: 'Ferramenta MCP iniciada', McpToolCompleted: 'Ferramenta MCP concluída', GuardrailBlocked: 'Bloqueado por segurança', ModelStarted: 'Inferência iniciada', ModelCompleted: 'Inferência concluída', ModelFailed: 'Falha de inferência', ModelRequested: 'Solicitação ao modelo', ModelResponse: 'Resposta do modelo' } as Record<string, string>)[type] ?? type;
   }
   // Additional display masking only; runtime authorization and redaction remain authoritative.
   safeDisplay(value: unknown): unknown {
@@ -122,7 +142,7 @@ export class Executions implements OnDestroy {
       this.stream = this.openStream(`/api/v1/executions/${encodeURIComponent(result.id)}/events/stream`);
       this.stream.addEventListener('execution', event => {
         if (generation !== this.generation) return;
-        try { const item = JSON.parse(event.data) as ExecutionEvent; if (item.executionId === result.id) this.mergeEvents([item]); } catch { /* Snapshot remains authoritative. */ }
+        try { const item = JSON.parse(event.data) as ExecutionEvent; if (item.executionId === result.id) { this.mergeEvents([item]); if (this.narration()) this.voice.speak(`${item.agentId ?? 'Orquestrador'}: ${this.eventLabel(item.type)}.`); } } catch { /* Snapshot remains authoritative. */ }
         void this.refresh(result.id, generation);
       });
       this.stream.onerror = () => this.poll(result.id, generation, 0);
@@ -155,6 +175,6 @@ export class Executions implements OnDestroy {
     this.timer = setTimeout(async () => { await this.refresh(id, generation); if (generation !== this.generation) return; await this.loadEvents(id, generation); this.poll(id, generation, attempt + 1); }, 3000);
   }
   private stop(): void { this.generation++; this.refreshingGeneration = null; this.refreshQueued = false; this.stream?.close(); this.stream = null; if (this.timer) clearTimeout(this.timer); this.timer = null; }
-  ngOnDestroy(): void { this.destroyed = true; this.stop(); }
+  ngOnDestroy(): void { this.destroyed = true; this.voice.stop(); this.stop(); }
 }
 

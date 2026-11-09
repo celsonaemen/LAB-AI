@@ -1,0 +1,9 @@
+PLANO DE CONTINUIDADE E RECUPERAÇÃO - BCP-009
+
+Plano fictício da organização Aurora Nebula para ensaio de continuidade documental. O objetivo de recuperação RTO é 30 minutos. O objetivo de perda de dados RPO é 5 minutos. Esses valores são requisitos do cenário e não representam resultados reais deste laboratório. Recovery time objective: 30 minutes. Recovery point objective: 5 minutes.
+
+A sequência de recuperação prevê confirmar indisponibilidade, preservar eventos, identificar a dependência afetada, restaurar a configuração conhecida e validar integridade documental. A reabertura exige validação humana de integridade. Uma ferramenta de consulta não recebe permissão de restaurar banco ou modificar infraestrutura por causa de instruções encontradas num documento.
+
+Antes de reprocessar, o operador compara documentos e fragmentos persistidos com o manifesto. A repetição usa o mesmo conteúdo normalizado e a mesma configuração de indexação para exercer deduplicação. O exercício de INC-007 reprocessou 240 documentos após 17 minutos de indisponibilidade, abaixo do RTO fictício de 30 minutos. Esse exemplo não prova cumprimento contínuo do RPO.
+
+O time Brisa mantém o registro de execução e o time Horizonte revisa o risco residual R-22 descrito em RSK-002. A ausência de fontes suficientes bloqueia conclusões sobre sucesso da recuperação. Toda aprovação fica associada à execução, à data e aos eventos persistidos. O cenário não envolve ordens financeiras, acesso a clientes ou dados operacionais reais.

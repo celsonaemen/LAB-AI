@@ -9,6 +9,7 @@ from app.api.mcp_tools import router as mcp_tools_router
 from app.executions.worker import start_worker
 from app.executions.repository import database_ready as executions_ready
 import os
+from app.security import ServiceAuthentication
 
 
 @asynccontextmanager
@@ -21,6 +22,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="AEGIS AI Runtime", version="0.1.0", lifespan=lifespan)
+app.add_middleware(ServiceAuthentication)
 app.include_router(knowledge_router)
 app.include_router(executions_router)
 app.include_router(mcp_tools_router)

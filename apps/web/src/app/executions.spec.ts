@@ -2,14 +2,16 @@ import { TestBed, fakeAsync, tick, flushMicrotasks } from '@angular/core/testing
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { Executions, EXECUTION_STREAM, Execution } from './executions';
+import { VOICE_CONSOLE } from './voice-console';
 
 describe('Executions', () => {
   const snapshot = (state = 'Completed'): Execution => ({ id: 'run-1', task: 'Revisar carteira', workflow: 'portfolio-review', portfolioId: 'balanced', state, agents: [], createdAt: '2026-11-07T12:00:00Z', startedAt: null, finishedAt: null, durationMs: null, result: { summary: 'Concluído' }, error: null, provider: 'deterministic', requireApproval: false });
   let http: HttpTestingController;
   const stream = { addEventListener: jasmine.createSpy(), close: jasmine.createSpy(), onerror: null as (() => void) | null };
+  const voice = { canSpeak: true, canListen: true, speak: jasmine.createSpy(), listen: jasmine.createSpy().and.resolveTo('Analise o cliente sintético'), stop: jasmine.createSpy() };
   beforeEach(async () => {
-    stream.addEventListener.calls.reset(); stream.close.calls.reset();
-    await TestBed.configureTestingModule({ imports: [Executions], providers: [provideHttpClient(), provideHttpClientTesting(), { provide: EXECUTION_STREAM, useValue: () => stream }] }).compileComponents();
+    stream.addEventListener.calls.reset(); stream.close.calls.reset(); voice.speak.calls.reset(); voice.listen.calls.reset(); voice.stop.calls.reset();
+    await TestBed.configureTestingModule({ imports: [Executions], providers: [provideHttpClient(), provideHttpClientTesting(), { provide: EXECUTION_STREAM, useValue: () => stream }, { provide: VOICE_CONSOLE, useValue: voice }] }).compileComponents();
     http = TestBed.inject(HttpTestingController);
   });
   afterEach(() => http.verify());
@@ -30,6 +32,32 @@ describe('Executions', () => {
     const fixture = TestBed.createComponent(Executions); fixture.detectChanges();
     http.expectNone('/api/v1/tools');
     expect(fixture.nativeElement.textContent).toContain('Descobrir ferramentas MCP');
+  });
+  it('offers voice narration as an explicit opt-in control', () => {
+    const fixture = TestBed.createComponent(Executions); fixture.detectChanges();
+    const control = Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button'))
+      .find(button => button.textContent?.includes('Ativar narração'));
+    expect(control).toBeDefined();
+    expect(fixture.nativeElement.textContent).toContain('Assistente por voz');
+  });
+  it('dictates tasks and narrates only operational SSE labels', async () => {
+    const fixture = TestBed.createComponent(Executions); const app = fixture.componentInstance;
+    await app.dictateTask();
+    expect(app.task).toBe('Analise o cliente sintético');
+    expect(app.voiceMessage()).toContain('Revise antes');
+    app.toggleNarration();
+    app.selected.set(snapshot('Running'));
+    const selection = app.select('run-1'); http.expectOne('/api/v1/executions/run-1').flush(snapshot('Running')); await selection;
+    http.expectOne('/api/v1/executions/run-1/events?after=0').flush([]);
+    await Promise.resolve();
+    const listener = stream.addEventListener.calls.mostRecent().args[1];
+    listener({data:JSON.stringify({sequence:1,executionId:'run-1',type:'AgentCompleted',agentId:'risk-agent',timestamp:'2026-11-08T12:00:00Z',data:{customerName:'never speak this'}})});
+    http.expectOne('/api/v1/executions/run-1').flush(snapshot('Completed'));
+    await Promise.resolve();
+    http.expectOne('/api/v1/executions/run-1/events?after=1').flush([]);
+    expect(voice.speak).toHaveBeenCalledWith('risk-agent: Agente concluído.');
+    expect(voice.speak.calls.allArgs().flat().join(' ')).not.toContain('never speak this');
+    fixture.destroy();
   });
   it('explains security blocks while retaining approval controls and masks trace secrets', () => {
     const fixture = TestBed.createComponent(Executions); const app = fixture.componentInstance;

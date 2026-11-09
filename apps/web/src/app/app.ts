@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { DecimalPipe, JsonPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { Executions } from './executions';
+import { BankOperations } from './bank-operations';
 
 interface Receipt { documentId: string; chunks: number; deduplicated: boolean; model: string; status?: string; metadata?: Record<string, string>; }
 interface Hit { documentId: string; chunkId: string; title: string; source: string; ordinal: number; content: string; score: number; metadata: Record<string, unknown>; filename: string | null; }
 interface SearchResponse { model: string; dimensions: number; results: Hit[]; context: { status: string; text: string; references: unknown[]; generatedAnswer: null }; }
-@Component({ selector: 'app-root', imports: [FormsModule, DecimalPipe, JsonPipe, Executions], templateUrl: './app.html', styleUrl: './app.css' })
+@Component({ selector: 'app-root', imports: [FormsModule, DecimalPipe, JsonPipe, Executions, BankOperations], templateUrl: './app.html', styleUrl: './app.css' })
 export class App {
-  readonly section = signal<'knowledge' | 'agents'>('knowledge');
+  readonly section = signal<'bank' | 'knowledge' | 'agents'>('knowledge');
   private readonly http = inject(HttpClient);
   title = ''; source = ''; metadata = '{}'; query = ''; topK = 5; minScore = 0.35; filter = '{}';
   file: File | null = null;

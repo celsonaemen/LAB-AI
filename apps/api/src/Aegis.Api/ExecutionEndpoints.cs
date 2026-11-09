@@ -19,19 +19,19 @@ public static class ExecutionEndpoints
                 var snapshot = await runtime.CreateAsync(request, token);
                 return Results.Accepted($"/api/v1/executions/{snapshot.Id}", snapshot);
             });
-        });
+        }).BankPermission(app, "execution.run");
         group.MapGet("", async (int? limit, int? offset, IExecutionRuntime runtime, CancellationToken token) =>
             limit is < 1 or > 100 || offset is < 0 or > 100000 ? Problem(400) :
-                await Execute(async () => Results.Ok(await runtime.ListAsync(limit ?? 20, offset ?? 0, token))));
+                await Execute(async () => Results.Ok(await runtime.ListAsync(limit ?? 20, offset ?? 0, token)))).BankPermission(app, "execution.read");
         group.MapGet("/{id:guid}", async (Guid id, IExecutionRuntime runtime, CancellationToken token) =>
-            await Execute(async () => Results.Ok(await runtime.GetAsync(id, token))));
+            await Execute(async () => Results.Ok(await runtime.GetAsync(id, token)))).BankPermission(app, "execution.read");
         group.MapGet("/{id:guid}/events", async (Guid id, long? after, IExecutionRuntime runtime, CancellationToken token) =>
-            after is < 0 ? Problem(400) : await Execute(async () => Results.Ok(await runtime.EventsAsync(id, after ?? 0, token))));
+            after is < 0 ? Problem(400) : await Execute(async () => Results.Ok(await runtime.EventsAsync(id, after ?? 0, token)))).BankPermission(app, "execution.read");
         group.MapPost("/{id:guid}/cancel", async (Guid id, IExecutionRuntime runtime, CancellationToken token) =>
-            await Execute(async () => Results.Ok(await runtime.CancelAsync(id, token))));
+            await Execute(async () => Results.Ok(await runtime.CancelAsync(id, token)))).BankPermission(app, "execution.cancel");
         group.MapPost("/{id:guid}/approve", async (Guid id, IExecutionRuntime runtime, CancellationToken token) =>
-            await Execute(async () => Results.Ok(await runtime.ApproveAsync(id, token))));
-        group.MapGet("/{id:guid}/events/stream", Stream);
+            await Execute(async () => Results.Ok(await runtime.ApproveAsync(id, token)))).BankPermission(app, "execution.approve");
+        group.MapGet("/{id:guid}/events/stream", Stream).BankPermission(app, "execution.read");
     }
 
     private static async Task Stream(Guid id, long? after, HttpContext context, IExecutionRuntime runtime)

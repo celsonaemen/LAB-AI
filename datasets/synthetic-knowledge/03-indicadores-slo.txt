@@ -1,0 +1,9 @@
+INDICADORES E OBJETIVOS DE SERVIÇO - KPI-003
+
+A organização Aurora Nebula e todos os valores deste documento são fictícios. O painel de estudo da plataforma Lume usa uma janela semanal para os indicadores operacionais. As metas são exemplos de engenharia, não resultados medidos no Aegis Agent Lab. O cumprimento precisa ser calculado com observações do serviço, e não inferido da existência deste texto.
+
+A disponibilidade alvo do serviço de pesquisa documental é 99,5%. A latência p95 de busca deve ficar abaixo de 800 ms. A latência p95 de ingestão deve ficar abaixo de 4 segundos para documentos textuais pequenos com modelo já carregado. O cold start é medido em uma série separada para não esconder a primeira carga do modelo. Search availability target: 99.5 percent; search p95 latency objective: below 800 milliseconds.
+
+Uma requisição sem evidência suficiente é uma resposta funcional válida quando declara esse estado. Uma dependência indisponível é um erro operacional e não pode ser contada como evidência suficiente. A taxa de documentos deduplicados deve aparecer separada da quantidade de documentos novos e da quantidade de novas tentativas.
+
+O incidente JASMIM-17, descrito em INC-007, teve 17 minutos de indisponibilidade. O relatório OPS-008 usa essa duração como fato do cenário. Não há dados suficientes neste corpus para deduzir disponibilidade mensal real. O glossário GLO-011 define diferença entre objetivo, indicador e evidência. Revisores devem preservar essa limitação em qualquer relatório.

@@ -5,6 +5,15 @@ import pytest
 from app.mcp_tools.client import call_tool, discover, MCPToolError
 
 
+def test_search_tool_returns_structured_content_to_mcp_client():
+    from app.mcp_tools.server import mcp
+    value = {'model': 'test', 'results': [], 'context': {
+        'status': 'insufficient_evidence', 'text': 'Insufficient evidence', 'references': []}}
+    result = mcp._tool_manager.get_tool('search_knowledge').fn_metadata.convert_result(value)
+    assert isinstance(result, tuple), 'MCP clients need structuredContent, not only a text block'
+    assert result[1]['context']['status'] == 'insufficient_evidence'
+
+
 @pytest.mark.parametrize('agent,name,args', [
     ('risk-agent', 'list_documents', {}),
     ('report-agent', 'get_execution_history', {}),

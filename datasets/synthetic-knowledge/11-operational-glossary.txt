@@ -1,0 +1,9 @@
+ENGLISH GLOSSARY OF OPERATIONAL EVIDENCE - GLO-011
+
+Aurora Nebula is a fictional organization. All people, systems, figures and incidents in this corpus are invented for software testing. This glossary supports Portuguese and English semantic retrieval without relying on confidential enterprise documents.
+
+Evidence is an observed document excerpt with a verifiable reference. A reference should identify an existing document, an existing chunk and its source. A similarity score expresses vector proximity; it does not prove that a claim is true. A target is not a measured outcome. The fictional search availability target in KPI-003 is 99.5 percent and the p95 search latency objective is below 800 milliseconds.
+
+Idempotent replay preserves the original document identifier when normalized content and indexing configuration are unchanged. The same operation can be retried without creating another copy. Incident JASMIM-17 in INC-007 lasted 17 minutes and required replay of 240 documents. These are declared scenario facts, not live measurements collected from the application.
+
+A recovery time objective describes the maximum desired restoration delay. A recovery point objective describes the maximum desired data loss window. BCP-009 sets them to 30 minutes and 5 minutes respectively. Insufficient evidence is a valid retrieval status and should never be converted into a fabricated source. A deterministic report is rule-based output, and must not be described as autonomous language-model inference.

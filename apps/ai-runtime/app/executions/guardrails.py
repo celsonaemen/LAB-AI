@@ -32,6 +32,6 @@ def check_request(text):
         raise GuardrailViolation('instruction_override')
 
 
-def filter_evidence(result):
+def filter_evidence(result, max_chars=6000):
     hits = [redact(h) for h in result.get('results', []) if not _INJECTION.search(str(h))]
-    return {**redact(result), 'results': hits, 'context': assemble_context(hits)}
+    return {**redact(result), 'results': hits, 'context': assemble_context(hits, max_chars)}

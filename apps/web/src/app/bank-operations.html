@@ -1,0 +1,38 @@
+<section class="bank-console" aria-labelledby="bank-heading">
+  <header class="console-heading">
+    <div><h1 id="bank-heading">Análise interna de clientes</h1><p>Consulte o dossiê permitido e inicie uma análise rastreável.</p></div>
+    <span class="synthetic-mark">Dados 100% sintéticos</span>
+  </header>
+  @if (loading()) { <p class="status" role="status">Carregando carteira de demonstração…</p> }
+  @if (error()) { <p class="error" role="alert">{{ error() }}</p><button type="button" (click)="load()">Tentar novamente</button> }
+  @if (!loading() && !error()) {
+    <div class="case-layout">
+      <aside class="case-index" aria-label="Clientes fictícios">
+        <div class="index-heading"><h2>Carteira em revisão</h2><span>{{ customers().length }} casos</span></div>
+        @for (customer of customers(); track customer.id) {
+          <button type="button" class="case-row" [class.active]="selected()?.id === customer.id" (click)="selected.set(customer)" [attr.aria-pressed]="selected()?.id === customer.id">
+            <span><strong>{{ customer.displayName }}</strong><small>{{ customer.id }} · {{ customer.segment }}</small></span>
+            <span class="risk">{{ customer.riskIndicator }}</span>
+          </button>
+        }
+      </aside>
+      @if (selected(); as customer) {
+        <article class="dossier">
+          <div class="dossier-title"><div><h2>{{ customer.displayName }}</h2><p>{{ customer.id }} · Relacionamento desde {{ customer.relationshipSince | date:'MM/yyyy':'UTC' }}</p></div><span class="state">{{ customer.caseStatus }}</span></div>
+          <p class="summary">{{ customer.summary }}</p>
+          <dl class="facts"><div><dt>Segmento</dt><dd>{{ customer.segment }}</dd></div><div><dt>Indicador de risco</dt><dd>{{ customer.riskIndicator }}</dd></div><div><dt>Última revisão</dt><dd>{{ customer.lastReviewAt | date:'dd/MM/yyyy':'UTC' }}</dd></div></dl>
+          <section class="flags" aria-labelledby="flags-heading"><h3 id="flags-heading">Pontos para revisão</h3><ul>@for (flag of customer.reviewFlags; track flag) { <li>{{ flag }}</li> }</ul></section>
+          <section class="timeline" aria-labelledby="timeline-heading"><h3 id="timeline-heading">Histórico documentado</h3>
+            @for (item of customer.timeline; track item.date + item.source) { <div class="timeline-row"><time>{{ item.date | date:'dd/MM/yyyy':'UTC' }}</time><div><strong>{{ item.category }}</strong><p>{{ item.description }}</p><small>Fonte: {{ item.source }}</small></div></div> }
+          </section>
+          <section class="analysis-action" aria-labelledby="analysis-heading">
+            <div><h3 id="analysis-heading">Análise assistida</h3><p>Data, Risk, Analytics e Report Agents trabalham sobre as evidências deste cliente. O relatório exige aprovação humana.</p></div>
+            <button type="button" (click)="startAnalysis()" [disabled]="starting()">{{ starting() ? 'Iniciando…' : 'Iniciar análise' }}</button>
+          </section>
+          @if (analysisError()) { <p class="error" role="alert">{{ analysisError() }}</p> }
+          @if (analysis(); as run) { <div class="analysis-receipt" role="status"><strong>Execução criada</strong><span>{{ run.id }}</span><p>Abra “Execuções de agentes” para acompanhar cada etapa, evidência e aprovação humana.</p></div> }
+        </article>
+      }
+    </div>
+  }
+</section>

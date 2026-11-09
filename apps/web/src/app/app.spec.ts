@@ -13,6 +13,18 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App); fixture.detectChanges();
     expect((fixture.nativeElement as HTMLElement).querySelector('h1')?.textContent).toContain('AEGIS AGENT LAB');
   });
+  it('offers a dedicated fictional-bank customer analysis workspace', async () => {
+    const fixture = TestBed.createComponent(App); fixture.detectChanges();
+    const root = fixture.nativeElement as HTMLElement;
+    const bankButton = Array.from(root.querySelectorAll('button')).find(button => button.textContent?.includes('Análise de clientes'));
+    expect(bankButton).toBeDefined();
+    bankButton?.click(); fixture.detectChanges();
+    const request = TestBed.inject(HttpTestingController).expectOne('/api/v1/bank/customers');
+    request.flush([{id:'CUS-FIC-1042',displayName:'Aurora Têxtil Ltda.',segment:'Empresas',caseStatus:'Revisão necessária',riskIndicator:'Elevado',relationshipSince:'2021-03-18',lastReviewAt:'2026-10-28',summary:'Caso sintético.',reviewFlags:['Cadastro divergente'],timeline:[],synthetic:true}]);
+    await fixture.whenStable(); fixture.detectChanges();
+    expect(root.textContent).toContain('Aurora Têxtil Ltda.');
+    expect(root.textContent).toContain('Dados 100% sintéticos');
+  });
   it('searches only through the gateway and displays evidence as plain text', async () => {
     const fixture = TestBed.createComponent(App); fixture.detectChanges();
     const root = fixture.nativeElement as HTMLElement;

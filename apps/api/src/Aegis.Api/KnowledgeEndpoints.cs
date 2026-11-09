@@ -20,7 +20,7 @@ public static class KnowledgeEndpoints
                 var result = await runtime.IngestAsync(request, token);
                 return Results.Created($"/api/v1/knowledge/documents/{result.DocumentId}", result);
             });
-        });
+        }).BankPermission(app, "knowledge.write");
         group.MapPost("/search", async (SearchRequest request, IKnowledgeRuntime runtime, CancellationToken token) =>
         {
             if (!Valid(request.Query, 500) || request.Limit is < 1 or > 20 ||
@@ -28,15 +28,15 @@ public static class KnowledgeEndpoints
                 request.MaxContextChars is < 200 or > 12000 || !ValidMetadata(request.MetadataFilter))
                 return Results.Problem(statusCode: 400, title: "Invalid search input");
             return await Execute(async () => Results.Ok(await runtime.SearchAsync(request, token)));
-        });
+        }).BankPermission(app, "knowledge.read");
         group.MapGet("/documents", async (int? limit, int? offset, IKnowledgeRuntime runtime, CancellationToken token) =>
         {
             if (limit is < 1 or > 100 || offset is < 0 or > 100000)
                 return Results.Problem(statusCode: 400, title: "Invalid pagination");
             return await Execute(async () => Results.Ok(await runtime.ListAsync(limit ?? 20, offset ?? 0, token)));
-        });
+        }).BankPermission(app, "knowledge.read");
         group.MapGet("/documents/{id:guid}", async (Guid id, IKnowledgeRuntime runtime, CancellationToken token) =>
-            await Execute(async () => Results.Ok(await runtime.GetAsync(id, token))));
+            await Execute(async () => Results.Ok(await runtime.GetAsync(id, token)))).BankPermission(app, "knowledge.read");
     }
 
     private static bool Valid(string? value, int max) => !string.IsNullOrWhiteSpace(value) && value.Length <= max;

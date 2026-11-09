@@ -1,0 +1,92 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+/Title (Arquitetura da plataforma Lume)
+/Author (Aegis Agent Lab)
+/Subject (Synthetic fictional knowledge dataset)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents <<
+/Length 1976
+>>
+stream
+BT /F1 10 Tf 54 740 Td 14 TL
+(ARQUITETURA DA PLATAFORMA LUME - ARC-001) Tj T*
+() Tj T*
+(Este documento descreve um cen·rio inteiramente fictÌcio da organizaÁ„o Aurora) Tj T*
+(Nebula. A plataforma Lume possui trÍs camadas lÛgicas: portal de operaÁ„o,) Tj T*
+(gateway de contratos e processamento documental. O portal chama somente o) Tj T*
+(gateway. A camada documental È respons·vel por extraÁ„o, normalizaÁ„o,) Tj T*
+(fragmentaÁ„o e pesquisa de evidÍncias. Esse desenho È um exercÌcio de estudo e) Tj T*
+(n„o descreve um sistema comercial.) Tj T*
+() Tj T*
+(A chave de idempotÍncia È o hash SHA-256 do conte˙do normalizado, acompanhado da) Tj T*
+(vers„o do modelo e da configuraÁ„o de fragmentaÁ„o. Reenviar o mesmo conte˙do) Tj T*
+(com a mesma configuraÁ„o deve retornar o identificador j· existente, preservar a) Tj T*
+(origem original e evitar novos fragmentos. Repetir a requisiÁ„o n„o representa) Tj T*
+(criar outro documento. Consulte DOC-006 para o procedimento de ingest„o e) Tj T*
+(INC-007 para um exemplo de reprocessamento.) Tj T*
+() Tj T*
+(OperaÁıes de leitura podem ser repetidas atÈ duas vezes quando a dependÍncia) Tj T*
+(responde com indisponibilidade transitÛria. Cada repetiÁ„o recebe o mesmo) Tj T*
+(identificador de correlaÁ„o. Uma aÁ„o que modifica estado exige verificaÁ„o) Tj T*
+(explÌcita de idempotÍncia antes de qualquer repetiÁ„o. Falhas definitivas s„o) Tj T*
+(registradas como evento estruturado com inÌcio, tÈrmino e motivo sanitizado.) Tj T*
+() Tj T*
+(O mÛdulo de autorizaÁ„o aplica as permissıes descritas em IAM-010. Conte˙do de) Tj T*
+(documentos recuperados È considerado evidÍncia n„o confi·vel. Uma ferramenta) Tj T*
+(recebe par‚metros tipados e n„o pode escolher comandos de terminal, caminhos) Tj T*
+(livres ou consultas SQL arbitr·rias. Aurora Nebula separa a recuperaÁ„o de) Tj T*
+(documentos da redaÁ„o de relatÛrios para preservar rastreabilidade.) Tj T*
+ET
+BT /F1 9 Tf 54 38 Td
+(Aegis Agent Lab - synthetic fixture - page 1/1) Tj ET
+endstream
+>>
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000015 00000 n 
+0000000169 00000 n 
+0000000228 00000 n 
+0000000277 00000 n 
+trailer
+<<
+/Size 5
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+2490
+%%EOF

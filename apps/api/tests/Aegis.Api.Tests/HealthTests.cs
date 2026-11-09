@@ -28,4 +28,19 @@ public sealed class HealthTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.ServiceUnavailable,
             (await client.GetAsync("/health/ready")).StatusCode);
     }
+
+    [Fact]
+    public async Task ProvenanceIdentifiesGutocodesAndTheExactDemoRelease()
+    {
+        using var client = factory.CreateClient();
+
+        var response = await client.GetAsync("/api/v1/provenance");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var body = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+        Assert.Equal("gutocodes", body!["ownerId"]);
+        Assert.Equal("https://github.com/celsonaemen/LAB-AI", body["repository"]);
+        Assert.Equal("bank-demo-2026.11", body["release"]);
+        Assert.Equal("c047c2e5a5ea179035c6649822b095b66e79e125b49bf8ff8e0850c8ba0647e5", body["sha256"]);
+    }
 }

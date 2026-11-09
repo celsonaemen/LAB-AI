@@ -1,0 +1,12 @@
+{
+  "dataset": "aurora-bank-homologation-v1",
+  "classification": "SYNTHETIC_ONLY",
+  "documents": [
+    { "file": "customer-1042-dossier.md", "customerId": "CUS-FIC-1042", "documentType": "customer-dossier", "title": "Dossiê cadastral — Aurora Têxtil" },
+    { "file": "customer-1042-service-history.md", "customerId": "CUS-FIC-1042", "documentType": "service-history", "title": "Histórico de atendimento — Aurora Têxtil" },
+    { "file": "customer-2087-operations.md", "customerId": "CUS-FIC-2087", "documentType": "operations-report", "title": "Relatório operacional — Horizonte Logística" },
+    { "file": "customer-2087-access-review.md", "customerId": "CUS-FIC-2087", "documentType": "access-review", "title": "Revisão de acessos — Horizonte Logística" },
+    { "file": "customer-3091-periodic-review.md", "customerId": "CUS-FIC-3091", "documentType": "periodic-review", "title": "Revisão periódica — Nimbo Alimentos" },
+    { "file": "customer-3091-registration.md", "customerId": "CUS-FIC-3091", "documentType": "customer-dossier", "title": "Dossiê cadastral — Nimbo Alimentos" }
+  ]
+}

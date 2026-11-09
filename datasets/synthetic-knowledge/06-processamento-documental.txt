@@ -1,0 +1,9 @@
+PROCEDIMENTO DE PROCESSAMENTO DOCUMENTAL - DOC-006
+
+Cenário inteiramente fictício da organização Aurora Nebula. A plataforma Lume aceita PDF textual, TXT em UTF-8 e Markdown em UTF-8. Documentos digitalizados sem OCR ficam fora do escopo deste ensaio. A extração deve produzir texto verificável antes de qualquer fragmentação. Um arquivo vazio ou ilegível gera erro explícito, sem indexação parcial.
+
+A normalização uniformiza Unicode, quebras de linha e espaços. Depois o texto é dividido em fragmentos com tamanho e sobreposição configuráveis. No corpus de aceitação, a configuração é 350 caracteres por fragmento e 60 caracteres de sobreposição. Os limites são de caracteres e não de tokens. A ordem de cada fragmento fica preservada por ordinal.
+
+Cada fragmento recebe embedding multilíngue de 384 dimensões. A busca compara vetores por distância de cosseno e retorna conteúdo, pontuação e metadados de origem. Os testes conferem a dimensão efetivamente gravada no banco e resolvem cada referência para uma linha persistida. Criar vetores artificiais não comprova funcionamento deste procedimento.
+
+Reingestão equivalente retorna o UUID original, mantém a configuração e informa deduplicação. O caso INC-007 reprocessa 240 documentos após um incidente, usando esse controle para evitar novas cópias. Mudança deliberada do conteúdo ou da configuração de fragmentação representa outra versão de indexação e precisa ser documentada. O corpus de teste não contém documentos bancários reais.

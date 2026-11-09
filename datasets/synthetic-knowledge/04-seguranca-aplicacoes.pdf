@@ -1,0 +1,90 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+/Title (Pol\355tica de seguran\347a de aplica\347\365es)
+/Author (Aegis Agent Lab)
+/Subject (Synthetic fictional knowledge dataset)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [ 0.0 0.0 612 792 ]
+/Parent 2 0 R
+/Contents <<
+/Length 1892
+>>
+stream
+BT /F1 10 Tf 54 740 Td 14 TL
+(POLÕTICA DE SEGURAN«A DE APLICA«’ES - SEC-004) Tj T*
+() Tj T*
+(PolÌtica fictÌcia da organizaÁ„o Aurora Nebula para um laboratÛrio educacional.) Tj T*
+(O princÌpio de menor privilÈgio limita cada ferramenta ‡ capacidade necess·ria) Tj T*
+(para sua responsabilidade. Identidade do agente e aprovaÁ„o humana s„o) Tj T*
+(fornecidas pela aplicaÁ„o confi·vel, nunca por texto livre ou par‚metros) Tj T*
+(sugeridos por um modelo. A matriz IAM-010 delimita as capacidades de leitura.) Tj T*
+() Tj T*
+(Documentos s„o evidÍncias e n„o instruÁıes privilegiadas. Um trecho recuperado) Tj T*
+(n„o pode alterar permissıes, revelar segredos, aprovar aÁıes ou solicitar acesso) Tj T*
+(ao sistema de arquivos. Padrıes claros de tentativa de substituir instruÁıes) Tj T*
+(devem ser isolados antes de compor o contexto. O documento ADV-012 È uma amostra) Tj T*
+(maliciosa sintÈtica destinada exclusivamente a validar esse isolamento.) Tj T*
+() Tj T*
+(Os par‚metros de ferramentas devem seguir schemas tipados. Campos adicionais s„o) Tj T*
+(rejeitados. Identificadores de documentos seguem UUID e n„o representam caminhos) Tj T*
+(locais. As ferramentas n„o expıem SQL, terminal ou rede arbitr·ria. Limites de) Tj T*
+(tempo, tamanho e quantidade de chamadas s„o aplicados no servidor e na) Tj T*
+(aplicaÁ„o. Uma decis„o de bloqueio precisa deixar evidÍncia sanitizada.) Tj T*
+() Tj T*
+(Segredos s„o removidos dos eventos antes de persistÍncia e apresentaÁ„o. Textos) Tj T*
+(sem evidÍncias suficientes devem manter esse estado explÌcito. A existÍncia de) Tj T*
+(verificaÁıes heurÌsticas n„o comprova prevenÁ„o absoluta de ataques; o) Tj T*
+(laboratÛrio exige testes adversariais e revis„o de limitaÁıes. Dados reais de) Tj T*
+(clientes, credenciais e materiais banc·rios s„o proibidos neste corpus.) Tj T*
+ET
+BT /F1 9 Tf 54 38 Td
+(Aegis Agent Lab - synthetic fixture - page 1/1) Tj ET
+endstream
+>>
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000015 00000 n 
+0000000186 00000 n 
+0000000245 00000 n 
+0000000294 00000 n 
+trailer
+<<
+/Size 5
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+2423
+%%EOF

@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-08",
+  "method": "Chrome DevTools browser interaction against the running Angular application",
+  "url": "http://127.0.0.1:4200/",
+  "search": {
+    "query": "Qual foi a duração do incidente JASMIM-17 e quantos documentos foram reprocessados?",
+    "renderedHits": 5,
+    "observedFacts": ["17 minutos", "240 documentos"],
+    "sources": ["08-relatorio-operacional.md", "07-incidente-jasmim.pdf", "11-operational-glossary.txt", "03-indicadores-slo.txt"],
+    "httpStatus": 200
+  },
+  "execution": {
+    "id": "f8adca72-0e23-4114-b2c9-7ec429f42af0",
+    "workflow": "document-review",
+    "metadataFilter": {"corpus": "aegis-synthetic-v1", "attack": "false"},
+    "beforeApproval": {
+      "visibleState": "Aguardando aprovação",
+      "completedAgents": ["data-agent", "risk-agent", "analytics-agent"],
+      "reportState": "Na fila",
+      "eventCount": 19,
+      "approvalButtonVisible": true,
+      "connectionText": "Acompanhando eventos em tempo real."
+    },
+    "afterApproval": {
+      "visibleState": "Concluída",
+      "completedAgents": ["data-agent", "risk-agent", "analytics-agent", "report-agent"],
+      "eventCount": 26,
+      "lastVisibleEvent": "ExecutionCompleted",
+      "resultHeadingVisible": true,
+      "referenceCount": 5,
+      "distinctDocuments": 4,
+      "providerLabel": "Determinístico · relatório por regras, sem inferência de LLM."
+    },
+    "manualRefresh": false,
+    "network": [
+      {"method": "POST", "path": "/api/v1/executions", "status": 202},
+      {"method": "GET", "pathSuffix": "/events/stream", "status": 200, "observedConnections": 2},
+      {"method": "POST", "pathSuffix": "/approve", "status": 200},
+      {"method": "GET", "pathSuffix": "/events?after=24", "status": 200}
+    ],
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  },
+  "limitations": ["This records actual browser observations and network logs, not an exported screenshot.", "The local PDF viewer screenshot and screenshot file export could not be completed; PDF extraction and layout geometry were validated separately."]
+}

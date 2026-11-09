@@ -10,5 +10,5 @@ public static class ToolEndpoints
             return Results.Problem(statusCode: error.StatusCode, title: error.StatusCode switch
             { 502 => "Invalid tool catalog response", 504 => "Tool catalog timed out", _ => "Tool catalog unavailable" });
         }
-    });
+    }).BankPermission(app, "tools.read");
 }
